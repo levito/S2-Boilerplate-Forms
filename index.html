@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+	<title>Forms</title>
+	<link rel="stylesheet" type="text/less" href="/forms/extensions/forms.less"/>
+	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/less.js/1.3.0/less-1.3.0.min.js"></script>
+	<script>less.watch()</script>
+</head>
+<body>
+	<h1>Best Practice: Forms</h1>
+	<p>Dieses Beispiel soll folgende Anforderungen erfüllen:</p>
+	<ul>
+		<li>Breite Unabhängig vom Container, damit responsive</li>
+		<li>Prozentuale Feldbreiten, nicht in px</li>
+		<li>Linearisierbar</li>
+		<li>2 Varianten: Labels links und labels oben</li>
+		<li>Robust gegenüber mehrzeiligen Labels</li>
+	</ul>
+	<form>
+		<fieldset class="labelsleft">
+			<h2>Beispiel: Labels links</h2>
+			<div class="formrow">
+				<label>Name</label>
+				<div class="formitem col1of2">
+					<input type="text"/>
+				</div>
+				<div class="formitem col1of2">
+					<input type="text"/>
+				</div>
+			</div>
+			<div class="formrow">
+				<label>Straße, Nr.</label>
+				<div class="formitem col1of3">
+					<input type="text"/>
+				</div>
+				<div class="formitem col2of3">
+					<input type="text"/>
+				</div>
+			</div>
+			<div class="formrow">
+				<label>E-Mail Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</label>
+				<div class="formitem col1of1">
+					<input type="text"/>
+				</div>
+			</div>
+			<div class="formrow">
+				<label>Land</label>
+				<div class="formitem col1of2">
+					<select>
+						<option selected>bitte wählen</option>
+						<option>Deutschland</option>
+						<option>Frankreich</option>
+						<option>Italien</option>
+						<option>Spanien</option>
+					</select>
+				</div>
+			</div>
+		</fieldset>
+	</form>
+</body>
+</html>
