@@ -1,14 +1,15 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
+	<meta charset="UTF-8">
 	<title>Forms</title>
 	<link rel="stylesheet" type="text/less" href="/forms/extensions/forms.less"/>
-	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/less.js/1.3.0/less-1.3.0.min.js"></script>
+	<script type="text/javascript" src="/forms/extensions/less-1.3.0.min.js"></script>
 	<script>less.watch()</script>
 </head>
 <body>
 	<h1>Best Practice: Forms</h1>
-	<p>Dieses Beispiel soll folgende Anforderungen erfüllen:</p>
+	<h2>Dieses Beispiel soll folgende Anforderungen erfüllen</h2>
 	<ul>
 		<li>Breite Unabhängig vom Container, damit responsive</li>
 		<li>Prozentuale Feldbreiten, nicht in px</li>
@@ -20,6 +21,43 @@
 		<fieldset class="labelsleft">
 			<h2>Beispiel: Labels links</h2>
 			<div class="formrow">
+				<div class="label">Anrede</div>
+				<div class="formitem col1of1">
+					<label>
+						<input type="radio" name="r" checked/>
+						Frau
+					</label>
+					<label>
+						<input type="radio" name="r"/>
+						Herr
+					</label>
+					<label>
+						<input type="radio" name="r"/>
+						Fräulein
+					</label>
+					<label>
+						<input type="radio" name="r"/>
+						Herrchen
+					</label>
+					<label>
+						<input type="radio" name="r"/>
+						Kanzler
+					</label>
+					<label>
+						<input type="radio" name="r"/>
+						Kaiser
+					</label>
+					<label>
+						<input type="radio" name="r"/>
+						König
+					</label>
+					<label>
+						<input type="radio" name="r"/>
+						Königin
+					</label>
+				</div>
+			</div>
+			<div class="formrow">
 				<label>Name</label>
 				<div class="formitem col1of2">
 					<input type="text"/>
@@ -29,18 +67,26 @@
 				</div>
 			</div>
 			<div class="formrow">
-				<label>Straße, Nr.</label>
+				<label>PLZ, Ort</label>
 				<div class="formitem col1of3">
-					<input type="text"/>
+					<input type="text" class="error" value="123"/>
+					<span class="errormsg">Bitte geben Sie eine gültige Postleitzahl ein.</span>
 				</div>
 				<div class="formitem col2of3">
+					<input type="text" value="Hamburg"/>
+					<span class="errormsg">Bitte geben Sie eine gültige Postleitzahl ein.</span>
+				</div>
+			</div>
+			<div class="formrow">
+				<label>E-Mail Lorem ipsum dolor sit amet, sed do eiusmod dolore magna aliqua</label>
+				<div class="formitem col1of1">
 					<input type="text"/>
 				</div>
 			</div>
 			<div class="formrow">
-				<label>E-Mail Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</label>
+				<label>Narchricht</label>
 				<div class="formitem col1of1">
-					<input type="text"/>
+					<textarea cols="40" rows="5"></textarea>
 				</div>
 			</div>
 			<div class="formrow">
@@ -53,6 +99,14 @@
 						<option>Italien</option>
 						<option>Spanien</option>
 					</select>
+				</div>
+			</div>
+			<div class="formrow">
+				<div class="formitem col1of1">
+					<label>
+						<input type="checkbox"/>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+					</label>
 				</div>
 			</div>
 		</fieldset>
