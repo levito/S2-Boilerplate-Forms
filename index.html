@@ -28,38 +28,38 @@
 			<h2>Beispiel: Labels links</h2>
 			<div class="formrow">
 				<div class="label">Anrede</div>
-				<div class="formitem col1of1">
+				<div class="formitem">
 					<label>
-						<input type="radio" name="r" checked/>
-						Frau
+						<input type="radio" name="salutation" checked/>
+						<span>Frau</span>
 					</label>
 					<label>
-						<input type="radio" name="r"/>
-						Herr
+						<input type="radio" name="salutation"/>
+						<span>Herr</span>
 					</label>
 					<label>
-						<input type="radio" name="r"/>
-						Fräulein
+						<input type="radio" name="salutation"/>
+						<span>Fräulein</span>
 					</label>
 					<label>
-						<input type="radio" name="r"/>
-						Herrchen
+						<input type="radio" name="salutation"/>
+						<span>Herrchen</span>
 					</label>
 					<label>
-						<input type="radio" name="r"/>
-						Kanzler
+						<input type="radio" name="salutation"/>
+						<span>Kanzler</span>
 					</label>
 					<label>
-						<input type="radio" name="r"/>
-						Kaiser
+						<input type="radio" name="salutation"/>
+						<span>Kaiser</span>
 					</label>
 					<label>
-						<input type="radio" name="r"/>
-						König
+						<input type="radio" name="salutation"/>
+						<span>König</span>
 					</label>
 					<label>
-						<input type="radio" name="r"/>
-						Königin
+						<input type="radio" name="salutation"/>
+						<span>Königin</span>
 					</label>
 				</div>
 			</div>
@@ -80,18 +80,33 @@
 				</div>
 				<div class="formitem col2of3">
 					<input type="text" value="Hamburg"/>
-					<span class="errormsg">Bitte geben Sie eine gültige Postleitzahl ein.</span>
+					<span class="errormsg">Bitte geben Sie Ihren Wohnort ein.</span>
 				</div>
 			</div>
 			<div class="formrow">
 				<label>E-Mail Lorem ipsum dolor sit amet, sed do eiusmod dolore magna aliqua</label>
-				<div class="formitem col1of1">
+				<div class="formitem">
 					<input type="text"/>
 				</div>
 			</div>
 			<div class="formrow">
+				<div class="label">Ihre Bewertung</div>
+				<div class="formitem rating">
+					<input type="radio" name="rating" id="rating5"/>
+					<label for="rating5"></label>
+					<input type="radio" name="rating" id="rating4"/>
+					<label for="rating4"></label>
+					<input type="radio" name="rating" id="rating3"/>
+					<label for="rating3"></label>
+					<input type="radio" name="rating" id="rating2"/>
+					<label for="rating2"></label>
+					<input type="radio" name="rating" id="rating1"/>
+					<label for="rating1"></label>
+				</div>
+			</div>
+			<div class="formrow">
 				<label>Narchricht</label>
-				<div class="formitem col1of1">
+				<div class="formitem">
 					<textarea cols="40" rows="5"></textarea>
 				</div>
 			</div>
@@ -108,10 +123,11 @@
 				</div>
 			</div>
 			<div class="formrow">
-				<div class="formitem col1of1">
+				<div class="formitem">
 					<label>
-						<input type="checkbox"/>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+						<input type="checkbox" class="error"/>
+						<span>Lorem ipsum dolor sit amet, <a href="javascript://">consectetur adipisicing</a> elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</span>
+						<span class="errormsg">Bitte bestätigen Sie die AGB.</span>
 					</label>
 				</div>
 			</div>

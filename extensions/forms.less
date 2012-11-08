@@ -1,3 +1,5 @@
+@charset "UTF-8";
+
 #basefont() {
 	font: 15px/1.333 normal normal normal Arial, Helvetica, sans-serif;
 }
@@ -7,7 +9,7 @@
 }
 
 body {
-	margin: 50px;
+	margin: 80px;
 	background: #eee5dd;
 }
 h1 {
@@ -16,11 +18,9 @@ h1 {
 	text-transform: uppercase;
 	letter-spacing: -1px;
 	&:after {
-		content: "";
+		content: "* * *";
 		display: block;
-		width: 30px;
-		margin: .5em auto 1em;
-		border-top: 2px dashed;
+		text-align: center;
 	}
 }
 body,
@@ -82,7 +82,7 @@ fieldset {
 		@labelwidth: 30%;
 		@indent: @labelwidth / (100% - @labelwidth) * 100;
 		#boxsizing;
-		padding: 0 0 10px;
+		padding: 0 0 20px;
 		font-size: 0;
 		line-height: 0;
 		@media screen and (min-width:768px) {
@@ -132,6 +132,9 @@ fieldset {
 				input[type="radio"] {
 					position: absolute;
 					left: 0;
+					&.error + span {
+						color: #d32;
+					}
 				}
 			}
 			.errormsg {
@@ -161,6 +164,37 @@ fieldset {
 			}
 			.error ~ .errormsg {
 				display: block;
+			}
+
+			// rating
+			&.rating {
+				direction: rtl;
+				width: auto;
+				label,
+				input {
+					margin: 0;
+					padding: 0;
+					width: 24px;
+					height: 24px;
+				}
+				label {
+					font-size: 24px;
+					margin:0;
+					display: inline-block;
+					color: #b5b8c3;
+					&:before {
+						content: "\2605";
+					}
+				}
+				input {
+					position: relative;
+					margin-left: -24px;
+					opacity: 0;
+					&:hover ~ label,
+					&:checked ~ label {
+						color: #359;
+					}
+				}
 			}
 		}
 	}
