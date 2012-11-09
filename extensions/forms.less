@@ -1,7 +1,12 @@
 @charset "UTF-8";
 
+@textcolor: #359;
+@mutedcolor: #b5b8c3;
+@errorcolor: #d32;
+
 #basefont() {
-	font: 15px/1.333 normal normal normal Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	line-height: 1.333;
 }
 #boxsizing(@model: border-box) {
 	-moz-box-sizing: @model;
@@ -12,15 +17,21 @@ body {
 	margin: 80px;
 	background: #eee5dd;
 }
+h1, h2, h3 {
+	font-family: Georgia, serif;
+}
 h1 {
 	font-size: 3em;
 	text-align: center;
 	text-transform: uppercase;
 	letter-spacing: -1px;
 	&:after {
-		content: "* * *";
+		content: "❦";
 		display: block;
+		margin: .3em 0 0;
 		text-align: center;
+		font-weight: normal;
+		// color: @mutedcolor;
 	}
 }
 body,
@@ -29,10 +40,11 @@ select,
 textarea {
 	#boxsizing;
 	#basefont;
+	font-family: Arial, Helvetica, sans-serif;
 
 	// fluff - set fonts and colors for both body and form elements
 	// color: #d84433;
-	color: #359;
+	color: @textcolor;
 }
 input[type="text"],
 input[type="password"],
@@ -47,7 +59,7 @@ textarea {
 
 	// fluff
 	border: none;
-	border-bottom: 1px solid #359;
+	border-bottom: 1px solid @textcolor;
 	background: #f8f2e8; //#f8f5ee;
 	padding: 10px;
 	outline: none;
@@ -55,8 +67,8 @@ textarea {
 		background: #fff;
 	}
 	&.error {
-		border-color: #d32;
-		color: #d32;
+		border-color: @errorcolor;
+		color: @errorcolor;
 	}
 }
 input[type="checkbox"],
@@ -77,6 +89,8 @@ fieldset {
 		margin-top: 0;
 	}
 }
+
+// labels on left side, responsive
 .labelsleft {
 	.formrow {
 		@labelwidth: 30%;
@@ -133,69 +147,89 @@ fieldset {
 					position: absolute;
 					left: 0;
 					&.error + span {
-						color: #d32;
-					}
-				}
-			}
-			.errormsg {
-				font-size: 11px;
-				line-height: normal;
-				display: none;
-				padding: 3px 8px;
-				background: #fff;
-				color: #d32;
-				@media screen and (min-width:480px) {
-					position: absolute;
-					z-index: 1;
-					bottom: 100%;
-					left: 100%;
-					margin: 0 -150px -5px -15%;
-					box-shadow: 0 1px 8px rgba(0,0,0,.1);
-					&:after {
-						content: "";
-						position: absolute;
-						bottom: 0;
-						left: 0;
-						border: 4px solid #d32;
-						border-top-color: transparent;
-						border-right-color: transparent;
-					}
-				}
-			}
-			.error ~ .errormsg {
-				display: block;
-			}
-
-			// rating
-			&.rating {
-				direction: rtl;
-				width: auto;
-				label,
-				input {
-					margin: 0;
-					padding: 0;
-					width: 24px;
-					height: 24px;
-				}
-				label {
-					font-size: 24px;
-					margin:0;
-					display: inline-block;
-					color: #b5b8c3;
-					&:before {
-						content: "\2605";
-					}
-				}
-				input {
-					position: relative;
-					margin-left: -24px;
-					opacity: 0;
-					&:hover ~ label,
-					&:checked ~ label {
-						color: #359;
+						color: @errorcolor;
 					}
 				}
 			}
 		}
+	}
+}
+
+// common for all layouts
+.formrow .formitem{
+	&.rating {
+		direction: rtl;
+		margin-top: 3px;
+		width: auto;
+		label,
+		input {
+			margin: 0;
+			padding: 0;
+			width: 24px;
+			height: 24px;
+		}
+		label {
+			font-size: 24px;
+			line-height: 1;
+			margin:0;
+			display: inline-block;
+			// color: @mutedcolor;
+			// &:before { content: "\2605"; }
+			&:before { content: "\2606"; }
+			span {
+				display: none;
+			}
+		}
+		input {
+			position: relative;
+			z-index: 1;
+			margin-left: -24px;
+			opacity: 0;
+			&:hover,
+			&:checked {
+				~ label {
+					// color: @textcolor;
+					&:before { content: "\2605"; }
+				}
+			}
+		}
+		&:hover {
+			input ~ label {
+				// color: @mutedcolor;
+				&:before { content: "\2606"; }
+			}
+			input:hover ~ label {
+				// color: @textcolor;
+				&:before { content: "\2605"; }
+			}
+		}
+	}
+	.errormsg {
+		font-size: 11px;
+		line-height: normal;
+		display: none;
+		padding: 3px 8px;
+		background: #fff;
+		color: @errorcolor;
+		@media screen and (min-width:480px) {
+			position: absolute;
+			z-index: 1;
+			bottom: 100%;
+			left: 100%;
+			margin: 0 -150px -5px -15%;
+			box-shadow: 0 1px 8px rgba(0,0,0,.1);
+			&:after {
+				content: "";
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				border: 4px solid @errorcolor;
+				border-top-color: transparent;
+				border-right-color: transparent;
+			}
+		}
+	}
+	.error ~ .errormsg {
+		display: block;
 	}
 }

@@ -14,7 +14,7 @@
 	<![endif]-->
 </head>
 <body>
-	<h1>Best Practice: Forms</h1>
+	<h1>Best Practice – Forms</h1>
 	<h2>Dieses Beispiel soll folgende Anforderungen erfüllen</h2>
 	<ul>
 		<li>Breite Unabhängig vom Container, damit responsive</li>
@@ -90,24 +90,34 @@
 				</div>
 			</div>
 			<div class="formrow">
-				<div class="label">Ihre Bewertung</div>
-				<div class="formitem rating">
-					<input type="radio" name="rating" id="rating5"/>
-					<label for="rating5"></label>
-					<input type="radio" name="rating" id="rating4"/>
-					<label for="rating4"></label>
-					<input type="radio" name="rating" id="rating3"/>
-					<label for="rating3"></label>
-					<input type="radio" name="rating" id="rating2"/>
-					<label for="rating2"></label>
-					<input type="radio" name="rating" id="rating1"/>
-					<label for="rating1"></label>
-				</div>
-			</div>
-			<div class="formrow">
 				<label>Narchricht</label>
 				<div class="formitem">
 					<textarea cols="40" rows="5"></textarea>
+				</div>
+			</div>
+			<div class="formrow">
+				<div class="label">Ihre Bewertung</div>
+				<div class="formitem rating">
+					<input type="radio" name="rating" id="rating5"/>
+					<label for="rating5">
+						<span>5 Sterne</span>
+					</label>
+					<input type="radio" name="rating" id="rating4"/>
+					<label for="rating4">
+						<span>4 Sterne</span>
+					</label>
+					<input type="radio" name="rating" id="rating3" checked/>
+					<label for="rating3">
+						<span>3 Sterne</span>
+					</label>
+					<input type="radio" name="rating" id="rating2"/>
+					<label for="rating2">
+						<span>2 Sterne</span>
+					</label>
+					<input type="radio" name="rating" id="rating1"/>
+					<label for="rating1">
+						<span>1 Stern</span>
+					</label>
 				</div>
 			</div>
 			<div class="formrow">
