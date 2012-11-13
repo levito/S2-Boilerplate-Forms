@@ -5,13 +5,15 @@
 	<title>Forms</title>
     <!--[if !IE | IE 9]><!-->
 		<link rel="stylesheet" type="text/less" href="/forms/extensions/forms.less"/>
-		<script type="text/javascript" src="/forms/extensions/less-1.3.0.min.js"></script>
+		<script type="text/javascript" src="/forms/extensions/less-1.3.1.min.js"></script>
 		<script>less.watch()</script>
 	<!-- <![endif]-->
 	<!--[if lte IE 8]>
 		<link rel="stylesheet" type="text/css" href="/forms/extensions/forms.css"/>
 		<script type="text/javascript" src="/forms/extensions/respond.min.js"></script>
 	<![endif]-->
+	<!--
+	-->
 </head>
 <body>
 	<h1>Best Practice – Forms</h1>
@@ -30,35 +32,35 @@
 				<div class="label">Anrede</div>
 				<div class="formitem">
 					<label>
-						<input type="radio" name="salutation" checked/>
+						<input type="radio" name="salutation" value="Frau" checked/>
 						<span>Frau</span>
 					</label>
 					<label>
-						<input type="radio" name="salutation"/>
+						<input type="radio" name="salutation" value="Herr"/>
 						<span>Herr</span>
 					</label>
 					<label>
-						<input type="radio" name="salutation"/>
+						<input type="radio" name="salutation" value="Fraeulein"/>
 						<span>Fräulein</span>
 					</label>
 					<label>
-						<input type="radio" name="salutation"/>
+						<input type="radio" name="salutation" value="Herrchen"/>
 						<span>Herrchen</span>
 					</label>
 					<label>
-						<input type="radio" name="salutation"/>
+						<input type="radio" name="salutation" value="Kanzler"/>
 						<span>Kanzler</span>
 					</label>
 					<label>
-						<input type="radio" name="salutation"/>
+						<input type="radio" name="salutation" value="Kaiser"/>
 						<span>Kaiser</span>
 					</label>
 					<label>
-						<input type="radio" name="salutation"/>
+						<input type="radio" name="salutation" value="Koenig"/>
 						<span>König</span>
 					</label>
 					<label>
-						<input type="radio" name="salutation"/>
+						<input type="radio" name="salutation" value="Koenigin"/>
 						<span>Königin</span>
 					</label>
 				</div>
@@ -98,23 +100,23 @@
 			<div class="formrow">
 				<div class="label">Ihre Bewertung</div>
 				<div class="formitem rating">
-					<input type="radio" name="rating" id="rating5"/>
+					<input type="radio" name="rating" value="5" id="rating5"/>
 					<label for="rating5">
 						<span>5 Sterne</span>
 					</label>
-					<input type="radio" name="rating" id="rating4"/>
+					<input type="radio" name="rating" value="4" id="rating4"/>
 					<label for="rating4">
 						<span>4 Sterne</span>
 					</label>
-					<input type="radio" name="rating" id="rating3" checked/>
+					<input type="radio" name="rating" value="3" id="rating3" checked/>
 					<label for="rating3">
 						<span>3 Sterne</span>
 					</label>
-					<input type="radio" name="rating" id="rating2"/>
+					<input type="radio" name="rating" value="2" id="rating2"/>
 					<label for="rating2">
 						<span>2 Sterne</span>
 					</label>
-					<input type="radio" name="rating" id="rating1"/>
+					<input type="radio" name="rating" value="1" id="rating1"/>
 					<label for="rating1">
 						<span>1 Stern</span>
 					</label>
@@ -142,6 +144,9 @@
 				</div>
 			</div>
 		</fieldset>
+		<div class="buttons">
+			<button>Submit form</button>
+		</div>
 	</form>
 </body>
 </html>

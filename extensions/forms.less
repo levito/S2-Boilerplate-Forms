@@ -12,6 +12,27 @@
 	-moz-box-sizing: @model;
 	box-sizing: @model;
 }
+#visuallyHidden() {
+	position: absolute;
+	z-index: -1;
+	opacity: 0;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	border: 0;
+	clip: rect(0 0 0 0);
+	overflow: hidden;
+}
+
+#starOn() {
+	&:before { content: "\2605"; }
+}
+#starOff() {
+	// color: @mutedcolor;
+	// &:before { content: "\2605"; }
+	&:before { content: "\2606"; }
+}
 
 body {
 	margin: 80px;
@@ -71,10 +92,8 @@ textarea {
 		color: @errorcolor;
 	}
 }
-input[type="checkbox"],
-input[type="radio"] {
-	#boxsizing;
-	padding: 0;
+textarea {
+	overflow-y: auto; // IE fix for consistency
 }
 fieldset {
 	margin: 40px 0;
@@ -156,52 +175,36 @@ fieldset {
 }
 
 // common for all layouts
-.formrow .formitem{
+.formrow .formitem {
 	&.rating {
-		direction: rtl;
 		margin-top: 3px;
 		width: auto;
+		white-space: nowrap;
 		label,
 		input {
+		}
+		label {
+			float: right;
 			margin: 0;
 			padding: 0;
 			width: 24px;
 			height: 24px;
-		}
-		label {
 			font-size: 24px;
 			line-height: 1;
-			margin:0;
-			display: inline-block;
-			// color: @mutedcolor;
-			// &:before { content: "\2605"; }
-			&:before { content: "\2606"; }
+			#starOff;
 			span {
 				display: none;
 			}
 		}
-		input {
-			position: relative;
-			z-index: 1;
-			margin-left: -24px;
-			opacity: 0;
-			&:hover,
-			&:checked {
-				~ label {
-					// color: @textcolor;
-					&:before { content: "\2605"; }
-				}
-			}
-		}
+		input { #visuallyHidden; }
+		label:hover,
+		label:hover ~ label,
+		input.checked ~ label { #starOn; } // class "checked" for IE8
+		input:checked ~ label { #starOn; } // separate to not confuse IE8
 		&:hover {
-			input ~ label {
-				// color: @mutedcolor;
-				&:before { content: "\2606"; }
-			}
-			input:hover ~ label {
-				// color: @textcolor;
-				&:before { content: "\2605"; }
-			}
+			input ~ label { #starOff; }
+			label:hover,
+			label:hover ~ label { #starOn; }
 		}
 	}
 	.errormsg {
