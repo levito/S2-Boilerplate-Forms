@@ -1,8 +1,9 @@
 @charset "UTF-8";
 
-@textcolor: #359;
-@mutedcolor: #b5b8c3;
-@errorcolor: #d32;
+@textcolor: #000;
+@mutedcolor: #ccc;
+@errorcolor: #d23;
+@starcolor: #000;
 
 #basefont() {
 	font-size: 15px;
@@ -27,16 +28,17 @@
 
 #starOn() {
 	&:before { content: "\2605"; }
+	color: @starcolor;
 }
 #starOff() {
-	// color: @mutedcolor;
-	// &:before { content: "\2605"; }
-	&:before { content: "\2606"; }
+	// &:before { content: "\2606"; }
+	&:before { content: "\2605"; }
+	color: @mutedcolor;
 }
 
 body {
 	margin: 80px;
-	background: #eee5dd;
+	background: #f2f2f2;
 }
 h1, h2, h3 {
 	font-family: Georgia, serif;
@@ -57,6 +59,7 @@ h1 {
 }
 body,
 input,
+button,
 select,
 textarea {
 	#boxsizing;
@@ -64,8 +67,12 @@ textarea {
 	font-family: Arial, Helvetica, sans-serif;
 
 	// fluff - set fonts and colors for both body and form elements
-	// color: #d84433;
 	color: @textcolor;
+}
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+    border: 0;
+    padding: 0;
 }
 input[type="text"],
 input[type="password"],
@@ -81,11 +88,12 @@ textarea {
 	// fluff
 	border: none;
 	border-bottom: 1px solid @textcolor;
-	background: #f8f2e8; //#f8f5ee;
+	background: #f2f2f2;
 	padding: 10px;
 	outline: none;
 	&:focus {
-		background: #fff;
+		box-shadow: inset 0 1px 4px rgba(0,0,0,.1);
+		background: #f8f8f8;
 	}
 	&.error {
 		border-color: @errorcolor;
@@ -98,13 +106,12 @@ textarea {
 fieldset {
 	margin: 40px 0;
 	border: none;
-	padding: 20px 30px 30px;
+	padding: 30px 40px;
 
 	// fluff
-	border-radius: 5px;
-	box-shadow: inset 0 1px 4px rgba(0,0,0,.1);
-	background: rgba(0,0,0,.05);
-	h2:first-child {
+	box-shadow: 0 2px 8px rgba(0,0,0,.1);
+	background: #fff;
+	.legend { // use with headlines; legend element is a bitch to style
 		margin-top: 0;
 	}
 }
@@ -118,7 +125,7 @@ fieldset {
 		padding: 0 0 20px;
 		font-size: 0;
 		line-height: 0;
-		@media screen and (min-width:768px) {
+		@media screen and (min-width:1024px) {
 			padding-left: @labelwidth;
 		}
 		label,
@@ -128,13 +135,13 @@ fieldset {
 			vertical-align: top;
 			width: 100%;
 			padding-top: 9px;
-			@media screen and (max-width:767px) {
+			@media screen and (max-width:1023px) {
 				padding-bottom: 5px;
 				+ .formitem {
 					padding-left: 0;
 				}
 			}
-			@media screen and (min-width:768px) {
+			@media screen and (min-width:1024px) {
 				margin-left: -@indent;
 				width: @indent;
 			}
@@ -146,7 +153,7 @@ fieldset {
 			vertical-align: top;
 			padding: 0 0 10px;
 			width: 100%;
-			@media screen and (min-width:480px) {
+			@media screen and (min-width:720px) {
 				padding: 0 0 0 10px;
 				&.col1of1 { width: 100%; }
 				&.col1of2 { width: 50%; }
@@ -180,10 +187,8 @@ fieldset {
 		margin-top: 3px;
 		width: auto;
 		white-space: nowrap;
-		label,
-		input {
-		}
 		label {
+			#starOff;
 			float: right;
 			margin: 0;
 			padding: 0;
@@ -191,7 +196,7 @@ fieldset {
 			height: 24px;
 			font-size: 24px;
 			line-height: 1;
-			#starOff;
+			cursor: pointer;
 			span {
 				display: none;
 			}
@@ -214,7 +219,7 @@ fieldset {
 		padding: 3px 8px;
 		background: #fff;
 		color: @errorcolor;
-		@media screen and (min-width:480px) {
+		@media screen and (min-width:720px) {
 			position: absolute;
 			z-index: 1;
 			bottom: 100%;
@@ -234,5 +239,25 @@ fieldset {
 	}
 	.error ~ .errormsg {
 		display: block;
+	}
+}
+
+
+// buttons
+.button {
+	display: inline-block;
+	margin: 0 10px 0 0;
+	border: none;
+	padding: 9px 30px;
+	text-decoration: none;
+	background: #000;
+	color: #fff;
+	cursor: pointer;
+}
+.buttons {
+	text-align: right;
+	.button {
+		margin-left: 10px;
+		margin-right: 0;
 	}
 }
