@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
 	<title>Forms</title>
     <!--[if !IE | IE 9]><!-->
 		<link rel="stylesheet" type="text/less" href="/forms/extensions/forms.less"/>
@@ -17,17 +18,20 @@
 </head>
 <body>
 	<h1>Best Practice – Forms</h1>
-	<h2>Dieses Beispiel soll folgende Anforderungen erfüllen</h2>
+	<h2>Dieses Beispiel erfüllt folgende Anforderungen</h2>
 	<ul>
-		<li>Breite Unabhängig vom Container, damit responsive</li>
-		<li>Prozentuale Feldbreiten, nicht in px</li>
-		<li>Linearisierbar</li>
-		<li>2 Varianten: Labels links und labels oben</li>
+		<li>Breite Unabhängig vom Container (prozentuale Feldbreiten, keine festen Pixel)</li>
+		<li>Responsive, linearisierbar, mobile-ready</li>
+		<li>2 Varianten: Labels links und Labels oben</li>
 		<li>Robust gegenüber mehrzeiligen Labels</li>
+		<li>Clientseitige Validierung mit HTML5 und JavaScript-Unterstützung</li>
+		<li>Inline-Fehlermeldungen</li>
+		<li>Browser-Support ab IE8 aufwärts</li>
 	</ul>
-	<form>
+	<form action="/forms" method="get">
 		<fieldset class="labelsleft">
 			<h3 class="legend">Beispiel: Labels links</h3>
+			<p>Clientseitige Validierung mit jQuery Tools Validator - HTML5-basiert. Damit sind jedoch keine Nicht-Standard-Validierungen möglich wie z.B. Gleichheit zweier Passörter.</p>
 			<div class="formrow">
 				<div class="label">Anrede</div>
 				<div class="formitem">
@@ -68,36 +72,45 @@
 			<div class="formrow">
 				<label>Name</label>
 				<div class="formitem col1of2">
-					<input type="text"/>
+					<input type="text" name="firstname" placeholder="Vorname" required/>
 				</div>
 				<div class="formitem col1of2">
-					<input type="text"/>
+					<input type="text" name="lastname" placeholder="Nachname" required/>
 				</div>
 			</div>
 			<div class="formrow">
 				<label>PLZ, Ort</label>
 				<div class="formitem col1of3">
-					<input type="text" class="error" value="123"/>
+					<input type="text" name="zip" pattern="[0-9]{5}"/>
 					<span class="errormsg">Bitte geben Sie eine gültige Postleitzahl ein.</span>
 				</div>
 				<div class="formitem col2of3">
-					<input type="text" value="Hamburg"/>
+					<input type="text" name="city"/>
 					<span class="errormsg">Bitte geben Sie Ihren Wohnort ein.</span>
 				</div>
 			</div>
 			<div class="formrow">
-				<label>E-Mail Lorem ipsum dolor sit amet, sed do eiusmod dolore magna aliqua</label>
+				<label>E-Mail und Telefon</label>
 				<div class="formitem col1of2">
-					<input type="text"/>
+					<input type="email" name="email"/>
 				</div>
 				<div class="formitem col1of2">
-					<button class="button">Inline button</button>
+					<input type="tel" name="phone"/>
+				</div>
+			</div>
+			<div class="formrow">
+				<label>Ihre Website, Blog, Ihr Google-Plus-Profil, Twitter- oder Facebook-Profil, whatever, und das Passwort dazu</label>
+				<div class="formitem col1of2">
+					<input type="url" name="website"/>
+				</div>
+				<div class="formitem col1of2">
+					<input type="password" placeholder="Passwort" name="password"/>
 				</div>
 			</div>
 			<div class="formrow">
 				<label>Narchricht</label>
 				<div class="formitem">
-					<textarea cols="40" rows="5"></textarea>
+					<textarea name="message" cols="40" rows="5"></textarea>
 				</div>
 			</div>
 			<div class="formrow">
@@ -111,7 +124,7 @@
 					<label for="rating4">
 						<span>4 Sterne</span>
 					</label>
-					<input type="radio" name="rating" value="3" id="rating3" checked/>
+					<input type="radio" name="rating" value="3" id="rating3" checked="checked"/>
 					<label for="rating3">
 						<span>3 Sterne</span>
 					</label>
@@ -128,19 +141,22 @@
 			<div class="formrow">
 				<label>Land</label>
 				<div class="formitem col1of2">
-					<select>
-						<option selected>bitte wählen</option>
+					<select name="country">
+						<option selected="selected">bitte wählen</option>
 						<option>Deutschland</option>
 						<option>Frankreich</option>
 						<option>Italien</option>
 						<option>Spanien</option>
 					</select>
 				</div>
+				<div class="formitem col1of2">
+					<button type="button" class="button">Inline button</button>
+				</div>
 			</div>
 			<div class="formrow">
 				<div class="formitem">
 					<label>
-						<input type="checkbox" class="error"/>
+						<input type="checkbox" name="terms" class="error"/>
 						<span>Lorem ipsum dolor sit amet, <a href="javascript://">consectetur adipisicing</a> elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</span>
 						<span class="errormsg">Bitte bestätigen Sie die AGB.</span>
 					</label>
@@ -154,6 +170,8 @@
 	</form>
 
 	<script type="text/javascript" src="/forms/extensions/jquery-1.8.2.min.js"></script>
+	<script type="text/javascript" src="/forms/extensions/jquery.tools.validator.js"></script>
+	<script type="text/javascript" src="/forms/extensions/jquery.validate.js"></script>
 	<script type="text/javascript" src="/forms/extensions/forms.js"></script>
 </body>
 </html>

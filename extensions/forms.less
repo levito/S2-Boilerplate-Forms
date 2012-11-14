@@ -1,9 +1,6 @@
 @charset "UTF-8";
 
-@textcolor: #000;
-@mutedcolor: #ccc;
 @errorcolor: #d23;
-@starcolor: #000;
 
 #basefont() {
 	font-size: 15px;
@@ -12,6 +9,11 @@
 #boxsizing(@model: border-box) {
 	-moz-box-sizing: @model;
 	box-sizing: @model;
+}
+#transition(@params: all .2s) {
+	-moz-transition: @params;
+	-webkit-transition: @params;
+	transition: @params;
 }
 #visuallyHidden() {
 	position: absolute;
@@ -27,27 +29,45 @@
 }
 
 #starOn() {
+	#transition;
+	color: #000;
 	&:before { content: "\2605"; }
-	color: @starcolor;
 }
 #starOff() {
-	// &:before { content: "\2606"; }
+	#transition;
+	color: #ccc;
 	&:before { content: "\2605"; }
-	color: @mutedcolor;
+	// &:before { content: "\2606"; }
 }
 
 body {
-	margin: 80px;
+	margin: 20px;
 	background: #f2f2f2;
+	@media screen and (min-width:481px) {
+		margin: 40px;
+	}
+	@media screen and (min-width:801px) {
+		margin: 80px;
+	}
+}
+a {
+	#transition;
+	color: #38d;
+	&:hover {
+		color: #6af;
+	}
 }
 h1, h2, h3 {
 	font-family: Georgia, serif;
 }
 h1 {
-	font-size: 3em;
 	text-align: center;
 	text-transform: uppercase;
-	letter-spacing: -1px;
+	font-size: 2em;
+	@media screen and (min-width:481px) {
+		font-size: 3em;
+		letter-spacing: -1px;
+	}
 	&:after {
 		content: "❦";
 		display: block;
@@ -67,7 +87,7 @@ textarea {
 	font-family: Arial, Helvetica, sans-serif;
 
 	// fluff - set fonts and colors for both body and form elements
-	color: @textcolor;
+	color: #000;
 }
 button::-moz-focus-inner,
 input::-moz-focus-inner {
@@ -76,9 +96,20 @@ input::-moz-focus-inner {
 }
 input[type="text"],
 input[type="password"],
+input[type="number"],
+input[type="tel"],
+input[type="email"],
+input[type="url"],
+input[type="date"],
+input[type="time"],
+input[type="month"],
+input[type="week"],
+input[type="datetime"],
+input[type="datetime-local"],
 select,
 textarea {
 	#basefont;
+	#transition;
 	display: inline-block;
 	vertical-align: top;
 	margin: 0;
@@ -87,7 +118,7 @@ textarea {
 
 	// fluff
 	border: none;
-	border-bottom: 1px solid @textcolor;
+	border-bottom: 1px solid #000;
 	background: #f2f2f2;
 	padding: 10px;
 	outline: none;
@@ -95,7 +126,8 @@ textarea {
 		box-shadow: inset 0 1px 4px rgba(0,0,0,.1);
 		background: #f8f8f8;
 	}
-	&.error {
+	&.error,
+	&.invalid {
 		border-color: @errorcolor;
 		color: @errorcolor;
 	}
@@ -104,12 +136,15 @@ textarea {
 	overflow-y: auto; // IE fix for consistency
 }
 fieldset {
-	margin: 40px 0;
+	margin: 20px -20px;
 	border: none;
-	padding: 30px 40px;
-
+	padding: 15px 20px;
+	@media screen and (min-width:481px) {
+		margin: 40px 0;
+		padding: 30px 40px;
+	}
 	// fluff
-	box-shadow: 0 2px 8px rgba(0,0,0,.1);
+	box-shadow: 0 2px 20px rgba(0,0,0,.1);
 	background: #fff;
 	.legend { // use with headlines; legend element is a bitch to style
 		margin-top: 0;
@@ -125,7 +160,7 @@ fieldset {
 		padding: 0 0 20px;
 		font-size: 0;
 		line-height: 0;
-		@media screen and (min-width:1024px) {
+		@media screen and (min-width:801px) {
 			padding-left: @labelwidth;
 		}
 		label,
@@ -135,13 +170,13 @@ fieldset {
 			vertical-align: top;
 			width: 100%;
 			padding-top: 9px;
-			@media screen and (max-width:1023px) {
+			@media screen and (max-width:800px) {
 				padding-bottom: 5px;
 				+ .formitem {
 					padding-left: 0;
 				}
 			}
-			@media screen and (min-width:1024px) {
+			@media screen and (min-width:801px) {
 				margin-left: -@indent;
 				width: @indent;
 			}
@@ -153,7 +188,7 @@ fieldset {
 			vertical-align: top;
 			padding: 0 0 10px;
 			width: 100%;
-			@media screen and (min-width:720px) {
+			@media screen and (min-width:481px) {
 				padding: 0 0 0 10px;
 				&.col1of1 { width: 100%; }
 				&.col1of2 { width: 50%; }
@@ -161,6 +196,9 @@ fieldset {
 				&.col2of3 { width: 66.66%; }
 				&.col1of4 { width: 25%; }
 				&.col3of4 { width: 75%; }
+			}
+			&:last-child {
+				margin-right: -1px; // fixes rounding issues on android
 			}
 			label {
 				position: relative;
@@ -189,7 +227,7 @@ fieldset {
 		white-space: nowrap;
 		label {
 			#starOff;
-			float: right;
+			float: right; // direction:rtl and non-static positioning of input breaks in IE8
 			margin: 0;
 			padding: 0;
 			width: 24px;
@@ -212,34 +250,54 @@ fieldset {
 			label:hover ~ label { #starOn; }
 		}
 	}
-	.errormsg {
-		font-size: 11px;
-		line-height: normal;
-		display: none;
-		padding: 3px 8px;
-		background: #fff;
-		color: @errorcolor;
-		@media screen and (min-width:720px) {
+}
+span.error,
+.errormsg,
+.invalidmsg {
+	#boxsizing;
+	display: none;
+	padding: 3px 8px;
+	background: #fff;
+	font-size: 11px;
+	line-height: normal;
+	color: @errorcolor;
+	@media screen and (min-width:481px) {
+		margin: 5px -120px 0 -50px;
+		max-width: 170px;
+		box-shadow: 0 1px 8px rgba(0,0,0,.2);
+		&:after {
+			content: "";
 			position: absolute;
-			z-index: 1;
-			bottom: 100%;
-			left: 100%;
-			margin: 0 -150px -5px -15%;
-			box-shadow: 0 1px 8px rgba(0,0,0,.1);
-			&:after {
-				content: "";
-				position: absolute;
-				bottom: 0;
-				left: 0;
-				border: 4px solid @errorcolor;
-				border-top-color: transparent;
-				border-right-color: transparent;
-			}
+			bottom: 0;
+			left: 0;
+			border: 4px solid @errorcolor;
+			border-top-color: transparent;
+			border-right-color: transparent;
 		}
 	}
-	.error ~ .errormsg {
-		display: block;
+	p {
+		margin: 0;
 	}
+}
+span.error,
+.errormsg {
+	@media screen and (min-width:481px) {
+		position: absolute;
+		z-index: 1;
+		bottom: 100%;
+		left: 0;
+		margin: 0 0 -5px 20px;
+		box-shadow: 0 1px 8px rgba(0,0,0,.2);
+	}
+	@media screen and (min-width:801px) {
+		left: 100%;
+		margin: 0 -120px -5px -50px;
+	}
+}
+.error ~ span.error,
+.error ~ .errormsg,
+.invalidmsg {
+	display: block;
 }
 
 
