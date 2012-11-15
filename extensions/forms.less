@@ -5,6 +5,12 @@
 #basefont() {
 	font-size: 15px;
 	line-height: 1.333;
+	word-spacing: 0;
+}
+#removewhitespace() {
+	font-size: 0;
+	line-height: 0;
+	word-spacing: -.3em;
 }
 #boxsizing(@model: border-box) {
 	-moz-box-sizing: @model;
@@ -76,6 +82,13 @@ h1 {
 		font-weight: normal;
 		// color: @mutedcolor;
 	}
+	span {
+		display: block;
+		font-size: 40%;
+		text-transform: none;
+		font-weight: normal;
+		letter-spacing: 0;
+	}
 }
 body,
 input,
@@ -87,12 +100,16 @@ textarea {
 	font-family: Arial, Helvetica, sans-serif;
 
 	// fluff - set fonts and colors for both body and form elements
+	outline: none;
 	color: #000;
 }
 button::-moz-focus-inner,
 input::-moz-focus-inner {
     border: 0;
     padding: 0;
+}
+.placeholder {
+	color: #999;
 }
 input[type="text"],
 input[type="password"],
@@ -121,13 +138,11 @@ textarea {
 	border-bottom: 1px solid #000;
 	background: #f2f2f2;
 	padding: 10px;
-	outline: none;
 	&:focus {
 		box-shadow: inset 0 1px 4px rgba(0,0,0,.1);
 		background: #f8f8f8;
 	}
-	&.error,
-	&.invalid {
+	&.error {
 		border-color: @errorcolor;
 		color: @errorcolor;
 	}
@@ -157,9 +172,8 @@ fieldset {
 		@labelwidth: 30%;
 		@indent: @labelwidth / (100% - @labelwidth) * 100;
 		#boxsizing;
+		#removewhitespace;
 		padding: 0 0 20px;
-		font-size: 0;
-		line-height: 0;
 		@media screen and (min-width:801px) {
 			padding-left: @labelwidth;
 		}
@@ -210,7 +224,7 @@ fieldset {
 				input[type="radio"] {
 					position: absolute;
 					left: 0;
-					&.error + span {
+					&.error ~ span {
 						color: @errorcolor;
 					}
 				}
@@ -220,89 +234,94 @@ fieldset {
 }
 
 // common for all layouts
-.formrow .formitem {
-	&.rating {
-		margin-top: 3px;
-		width: auto;
-		white-space: nowrap;
-		label {
-			#starOff;
-			float: right; // direction:rtl and non-static positioning of input breaks in IE8
-			margin: 0;
-			padding: 0;
-			width: 24px;
-			height: 24px;
-			font-size: 24px;
-			line-height: 1;
-			cursor: pointer;
-			span {
-				display: none;
+.formrow {
+	label,
+	.label {
+		.req {
+			color: @errorcolor;
+		}
+	}
+	.formitem {
+		&.rating {
+			margin-top: 3px;
+			width: auto;
+			white-space: nowrap;
+			.star {
+				#starOff;
+				float: right; // direction:rtl and non-static positioning of input breaks in IE8
+				margin: 0;
+				padding: 0;
+				width: 24px;
+				height: 24px;
+				font-size: 24px;
+				line-height: 1;
+				cursor: pointer;
+				span {
+					display: none;
+				}
+			}
+			input { #visuallyHidden; }
+			.star:hover,
+			.star:hover ~ .star,
+			input.checked ~ .star { #starOn; } // class "checked" for IE8
+			input:checked ~ .star { #starOn; } // separate to not confuse IE8
+			&:hover {
+				input {
+					~ .star { #starOff; }
+				}
+				.star:hover,
+				.star:hover ~ .star { #starOn; }
 			}
 		}
-		input { #visuallyHidden; }
-		label:hover,
-		label:hover ~ label,
-		input.checked ~ label { #starOn; } // class "checked" for IE8
-		input:checked ~ label { #starOn; } // separate to not confuse IE8
-		&:hover {
-			input ~ label { #starOff; }
-			label:hover,
-			label:hover ~ label { #starOn; }
+		label.error {
+			#boxsizing;
+			display: none;
+			padding: 3px 8px;
+			background: #fff;
+			font-size: 11px;
+			line-height: normal;
+			color: @errorcolor;
+
+			// reset rating styles; use this if you don't want to use ".star" class on rating star labels; !important because of excessive styling
+			// width: auto !important;
+			// height: auto !important;
+			// color: @errorcolor !important;
+			// &:before {
+			// 	content: none !important;
+			// }
+
+			@media screen and (min-width:481px) {
+				position: absolute;
+				z-index: 1;
+				bottom: 100%;
+				left: 0;
+				margin: 0 0 -5px 20px;
+				box-shadow: 0 1px 8px rgba(0,0,0,.2);
+				&:after {
+					content: "";
+					position: absolute;
+					bottom: 0;
+					left: 0;
+					border: 4px solid @errorcolor;
+					border-top-color: transparent;
+					border-right-color: transparent;
+				}
+			}
+			@media screen and (min-width:801px) {
+				left: 100%;
+				margin: 0 -120px -5px -50px;
+			}
+		}
+		.error ~ label.error {
+			display: block;
 		}
 	}
-}
-span.error,
-.errormsg,
-.invalidmsg {
-	#boxsizing;
-	display: none;
-	padding: 3px 8px;
-	background: #fff;
-	font-size: 11px;
-	line-height: normal;
-	color: @errorcolor;
-	@media screen and (min-width:481px) {
-		margin: 5px -120px 0 -50px;
-		max-width: 170px;
-		box-shadow: 0 1px 8px rgba(0,0,0,.2);
-		&:after {
-			content: "";
-			position: absolute;
-			bottom: 0;
-			left: 0;
-			border: 4px solid @errorcolor;
-			border-top-color: transparent;
-			border-right-color: transparent;
-		}
-	}
-	p {
-		margin: 0;
-	}
-}
-span.error,
-.errormsg {
-	@media screen and (min-width:481px) {
-		position: absolute;
-		z-index: 1;
-		bottom: 100%;
-		left: 0;
-		margin: 0 0 -5px 20px;
-		box-shadow: 0 1px 8px rgba(0,0,0,.2);
-	}
-	@media screen and (min-width:801px) {
-		left: 100%;
-		margin: 0 -120px -5px -50px;
-	}
-}
-.error ~ span.error,
-.error ~ .errormsg,
-.invalidmsg {
-	display: block;
 }
 
 
 // buttons
 .button {
+	#transition;
 	display: inline-block;
 	margin: 0 10px 0 0;
 	border: none;
@@ -311,6 +330,16 @@ span.error,
 	background: #000;
 	color: #fff;
 	cursor: pointer;
+	&:hover,
+	&:focus {
+		background: #333;
+		color: #fff;
+	}
+	&:active {
+		#transition(none);
+		background: #000;
+		color: #ccc;
+	}
 }
 .buttons {
 	text-align: right;
