@@ -29,9 +29,10 @@
 	<form action="/forms" method="get">
 		<fieldset class="labelsleft">
 			<h3 class="legend">Beispiel: Labels links</h3>
+			<p>Empfehlenswert für die meisten Formulare und Prozesse</p>
 			<div class="formrow">
 				<div class="label">Anrede<span class="req">*</span></div>
-				<div class="formitem">
+				<div class="formitem ticks">
 					<label>
 						<input type="radio" name="salutation" value="Frau" required="required"/>
 						<span>Frau</span>
@@ -94,7 +95,7 @@
 				</div>
 			</div>
 			<div class="formrow">
-				<label for="website">Ihre Website, Blog, Ihr Google-Plus-Profil, Twitter- oder Facebook-Profil, whatever</label>
+				<label for="website">Ihre Website, Blog, Ihr Google-Plus-Profil, Twitter- oder Facebook-Profil, whatever. Extra viel Text hier um superlange Labels zu testen. Kunden tun so etwas.</label>
 				<div class="formitem col1of2">
 					<input type="url" name="website" id="website"/>
 				</div>
@@ -128,7 +129,7 @@
 					<label for="rating4" class="star">
 						<span>4 Sterne</span>
 					</label>
-					<input type="radio" name="rating" value="3" id="rating3" required="required" checked="checked"/><!-- checked="checked" -->
+					<input type="radio" name="rating" value="3" id="rating3" required="required"/><!-- checked="checked" -->
 					<label for="rating3" class="star">
 						<span>3 Sterne</span>
 					</label>
@@ -155,7 +156,7 @@
 				</div>
 			</div>
 			<div class="formrow">
-				<div class="formitem">
+				<div class="formitem ticks">
 					<label>
 						<input type="checkbox" name="terms" class="error" required="required"/>
 						<span>Hiermit bestätige ich die <a href="javascript://">AGB</a> und erlaube Ihnen alles, was Sie wollen. Hier ist schon mal eine Error-Klasse dran, um eine serverseitige Validierung zu simulieren. Und der Text ist länger, um das Umbruch-Verhalten zu testen.</span>
@@ -164,6 +165,115 @@
 				</div>
 			</div>
 		</fieldset>
+
+		<fieldset class="labelstop">
+			<h3 class="legend">Beispiel: Labels oben</h3>
+			<p>Empfehlenswert für sehr kurze oder schmale Formulare</p>
+			<div class="formrow">
+				<div class="formitem">
+					<div class="label">Anrede</div>
+					<div class="ticks">
+						<label>
+							<input type="radio" name="salutation2" value="Frau" required="required"/>
+							<span>Frau</span>
+						</label>
+						<label>
+							<input type="radio" name="salutation2" value="Herr" required="required"/>
+							<span>Herr</span>
+						</label>
+						<label>
+							<input type="radio" name="salutation2" value="Fraeulein" required="required"/>
+							<span>Fräulein</span>
+						</label>
+						<label>
+							<input type="radio" name="salutation2" value="Herrchen" required="required"/>
+							<span>Herrchen</span>
+						</label>
+						<label>
+							<input type="radio" name="salutation2" value="Kanzler" required="required"/>
+							<span>Kanzler</span>
+						</label>
+						<label>
+							<input type="radio" name="salutation2" value="Kaiser" required="required"/>
+							<span>Kaiser</span>
+						</label>
+						<label>
+							<input type="radio" name="salutation2" value="Koenig" required="required"/>
+							<span>König</span>
+						</label>
+						<label>
+							<input type="radio" name="salutation2" value="Koenigin" required="required"/>
+							<span>Königin</span>
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="formrow">
+				<div class="formitem col1of2">
+					<label for="firstname2">Vorname</label>
+					<input type="text" name="firstname2" id="firstname2" placeholder="Vorname" required="required"/>
+				</div>
+				<div class="formitem col1of2">
+					<label for="lastname2">Nachname</label>
+					<input type="text" name="lastname2" id="lastname2" placeholder="Nachname" required="required"/>
+				</div>
+			</div>
+			<div class="formrow">
+				<div class="formitem col1of3">
+					<label for="zip2">PLZ</label>
+					<input type="text" name="zip2" id="zip2" pattern="[0-9]{5}"/>
+				</div>
+				<div class="formitem col2of3">
+					<label for="city2">Ort</label>
+					<input type="text" name="city2" id="city2"/>
+				</div>
+			</div>
+			<div class="formrow">
+				<div class="formitem">
+					<label for="message2">Narchricht</label>
+					<textarea name="message2" id="message2" cols="40" rows="5"></textarea>
+				</div>
+			</div>
+			<div class="formrow">
+				<div class="formitem">
+					<div class="label">Ihre Bewertung<span class="req">*</span></div>
+					<div class="rating">
+						<input type="radio" name="rating2" value="5" id="rating5b" required="required"/>
+						<label for="rating5b" class="star">
+							<span>5 Sterne</span>
+						</label>
+						<input type="radio" name="rating2" value="4" id="rating4b" required="required"/>
+						<label for="rating4b" class="star">
+							<span>4 Sterne</span>
+						</label>
+						<input type="radio" name="rating2" value="3" id="rating3b" required="required"/><!-- checked="checked" -->
+						<label for="rating3b" class="star">
+							<span>3 Sterne</span>
+						</label>
+						<input type="radio" name="rating2" value="2" id="rating2b" required="required"/>
+						<label for="rating2b" class="star">
+							<span>2 Sterne</span>
+						</label>
+						<input type="radio" name="rating2" value="1" id="rating1b" required="required"/>
+						<label for="rating1b" class="star">
+							<span>1 Stern</span>
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="formrow">
+				<div class="formitem">
+					<div class="ticks">
+						<label>
+							<input type="checkbox" name="terms2" class="error" required="required"/>
+							<span>Hiermit bestätige ich die <a href="javascript://">AGB</a> und erlaube Ihnen alles, was Sie wollen. Hier ist schon mal eine Error-Klasse dran, um eine serverseitige Validierung zu simulieren. Und der Text ist länger, um das Umbruch-Verhalten zu testen.</span>
+							<label for="terms" class="error">Bitte bestätigen Sie die AGB.</label>
+						</label>
+					</div>
+				</div>
+			</div>
+		</fieldset>
+
 		<div class="buttons">
 			<a href="javascript://" class="button">A link button</a>
 			<button class="button">Submit form</button>

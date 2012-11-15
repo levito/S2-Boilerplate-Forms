@@ -1,6 +1,7 @@
 @charset "UTF-8";
 
 @errorcolor: #d23;
+@formgutterwidth: 10px;
 
 #basefont() {
 	font-size: 15px;
@@ -10,7 +11,7 @@
 #removewhitespace() {
 	font-size: 0;
 	line-height: 0;
-	word-spacing: -.3em;
+	word-spacing: -.3em; // needed by browser with min font-size > 0, e.g. Opera
 }
 #boxsizing(@model: border-box) {
 	-moz-box-sizing: @model;
@@ -47,13 +48,15 @@
 }
 
 body {
-	margin: 20px;
+	max-width: 1280px;
+	margin: 0 auto;
+	padding: 20px;
 	background: #f2f2f2;
 	@media screen and (min-width:481px) {
-		margin: 40px;
+		padding: 40px;
 	}
 	@media screen and (min-width:801px) {
-		margin: 80px;
+		padding: 80px;
 	}
 }
 a {
@@ -67,6 +70,7 @@ h1, h2, h3 {
 	font-family: Georgia, serif;
 }
 h1 {
+	margin-top: 0;
 	text-align: center;
 	text-transform: uppercase;
 	font-size: 2em;
@@ -77,10 +81,9 @@ h1 {
 	&:after {
 		content: "❦";
 		display: block;
-		margin: .3em 0 0;
+		margin: .3em 0 1.3em;
 		text-align: center;
 		font-weight: normal;
-		// color: @mutedcolor;
 	}
 	span {
 		display: block;
@@ -153,10 +156,10 @@ textarea {
 fieldset {
 	margin: 20px -20px;
 	border: none;
-	padding: 15px 20px;
+	padding: 15px 20px-@formgutterwidth 15px 20px;
 	@media screen and (min-width:481px) {
 		margin: 40px 0;
-		padding: 30px 40px;
+		padding: 30px 40px-@formgutterwidth 30px 40px;
 	}
 	// fluff
 	box-shadow: 0 2px 20px rgba(0,0,0,.1);
@@ -166,112 +169,39 @@ fieldset {
 	}
 }
 
-// labels on left side, responsive
-.labelsleft {
-	.formrow {
-		@labelwidth: 30%;
-		@indent: @labelwidth / (100% - @labelwidth) * 100;
-		#boxsizing;
-		#removewhitespace;
-		padding: 0 0 20px;
-		@media screen and (min-width:801px) {
-			padding-left: @labelwidth;
-		}
-		label,
-		.label {
-			#basefont;
-			display: inline-block;
-			vertical-align: top;
-			width: 100%;
-			padding-top: 9px;
-			@media screen and (max-width:800px) {
-				padding-bottom: 5px;
-				+ .formitem {
-					padding-left: 0;
-				}
-			}
-			@media screen and (min-width:801px) {
-				margin-left: -@indent;
-				width: @indent;
-			}
-		}
-		.formitem {
-			#boxsizing;
-			position: relative;
-			display: inline-block;
-			vertical-align: top;
-			padding: 0 0 10px;
-			width: 100%;
-			@media screen and (min-width:481px) {
-				padding: 0 0 0 10px;
-				&.col1of1 { width: 100%; }
-				&.col1of2 { width: 50%; }
-				&.col1of3 { width: 33.33%; }
-				&.col2of3 { width: 66.66%; }
-				&.col1of4 { width: 25%; }
-				&.col3of4 { width: 75%; }
-			}
-			&:last-child {
-				margin-right: -1px; // fixes rounding issues on android
-			}
-			label {
-				position: relative;
-				margin: 0;
-				padding-left: 25px;
-				padding-right: 20px;
-				width: auto;
-				input[type="checkbox"],
-				input[type="radio"] {
-					position: absolute;
-					left: 0;
-					&.error ~ span {
-						color: @errorcolor;
-					}
-				}
-			}
-		}
-	}
-}
-
 // common for all layouts
 .formrow {
+	#boxsizing;
+	#removewhitespace;
+	margin-left: -@formgutterwidth;
+	width: 100%;
 	label,
 	.label {
+		#boxsizing;
+		#basefont;
+		display: inline-block;
+		vertical-align: top;
+		padding: 9px 0 5px;
 		.req {
 			color: @errorcolor;
 		}
 	}
+	> label,
+	> .label {
+		padding-left: @formgutterwidth;
+		width: 100%;
+		font-size: 11px;
+		font-weight: bold;
+	}
 	.formitem {
-		&.rating {
-			margin-top: 3px;
-			width: auto;
-			white-space: nowrap;
-			.star {
-				#starOff;
-				float: right; // direction:rtl and non-static positioning of input breaks in IE8
-				margin: 0;
-				padding: 0;
-				width: 24px;
-				height: 24px;
-				font-size: 24px;
-				line-height: 1;
-				cursor: pointer;
-				span {
-					display: none;
-				}
-			}
-			input { #visuallyHidden; }
-			.star:hover,
-			.star:hover ~ .star,
-			input.checked ~ .star { #starOn; } // class "checked" for IE8
-			input:checked ~ .star { #starOn; } // separate to not confuse IE8
-			&:hover {
-				input {
-					~ .star { #starOff; }
-				}
-				.star:hover,
-				.star:hover ~ .star { #starOn; }
-			}
+		#boxsizing;
+		position: relative;
+		display: inline-block;
+		vertical-align: top;
+		padding: 0 0 10px @formgutterwidth;
+		width: 100%;
+		&:last-child {
+			margin-right: -1px; // fixes rounding issues on android
 		}
 		label.error {
 			#boxsizing;
@@ -282,20 +212,12 @@ fieldset {
 			line-height: normal;
 			color: @errorcolor;
 
-			// reset rating styles; use this if you don't want to use ".star" class on rating star labels; !important because of excessive styling
-			// width: auto !important;
-			// height: auto !important;
-			// color: @errorcolor !important;
-			// &:before {
-			// 	content: none !important;
-			// }
-
 			@media screen and (min-width:481px) {
 				position: absolute;
 				z-index: 1;
 				bottom: 100%;
 				left: 0;
-				margin: 0 0 -5px 20px;
+				margin: 0 -120px -5px 20px;
 				box-shadow: 0 1px 8px rgba(0,0,0,.2);
 				&:after {
 					content: "";
@@ -314,6 +236,117 @@ fieldset {
 		}
 		.error ~ label.error {
 			display: block;
+		}
+	}
+	@media screen and (min-width:481px) {
+		.col1of1 { width: 100%; }
+		.col1of2 { width: 50%; }
+		.col1of3 { width: 33.33%; }
+		.col2of3 { width: 66.66%; }
+		.col1of4 { width: 25%; }
+		.col3of4 { width: 75%; }
+	}
+	.rating {
+		display: inline-block;
+		padding-top: 8px;
+		padding-bottom: 8px;
+		width: auto;
+		white-space: nowrap;
+		.star {
+			#starOff;
+			float: right; // direction:rtl and non-static positioning of input breaks in IE8
+			margin: 0;
+			padding: 0;
+			width: 24px;
+			height: 24px;
+			font-size: 24px;
+			line-height: 1;
+			cursor: pointer;
+			span {
+				display: none;
+			}
+		}
+		input { #visuallyHidden; }
+		.star:hover,
+		.star:hover ~ .star,
+		input.checked ~ .star { #starOn; } // class "checked" for IE8
+		input:checked ~ .star { #starOn; } // separate to not confuse IE8
+		&:hover {
+			input {
+				~ .star { #starOff; }
+			}
+			.star:hover,
+			.star:hover ~ .star { #starOn; }
+		}
+	}
+	.ticks label { // use with .formitem
+		position: relative;
+		margin: 0;
+		padding-left: 25px;
+		padding-right: 20px;
+		width: auto;
+		input[type="checkbox"],
+		input[type="radio"] {
+			position: absolute;
+			left: 0;
+			&.error ~ span {
+				color: @errorcolor;
+			}
+		}
+	}
+}
+
+// labels on left side, responsive
+.labelsleft {
+	.formrow {
+		@labelwidth: 25%;
+		@indent: @labelwidth / (100% - @labelwidth) * 100;
+		@media screen and (min-width:801px) {
+			padding: 0 0 20px @labelwidth;
+			> label,
+			> .label {
+				margin-left: -@indent;
+				padding-top: 13px;
+				width: @indent;
+			}
+		}
+	}
+}
+
+// labels on top
+.labelstop {
+	.formitem {
+		position: relative;
+		> label,
+		> .label {
+			&:first-child {
+				width: 100%;
+				font-size: 11px;
+				font-weight: bold;
+			}
+		}
+		@media screen and (min-width:481px) {
+			label.error {
+				position: absolute;
+				top: 6px;
+				right: 0;
+				bottom: auto;
+				left: auto;
+				margin: 0;
+			}
+		}
+	}
+	.ticks {
+		label {
+			padding-top: 0;
+		}
+		label.error {
+			position: absolute;
+			top: 0;
+			right: auto;
+			bottom: auto;
+			left: 100px;
+			margin: -22px -999px 0 0;
 		}
 	}
 }

@@ -95,7 +95,6 @@ $.validator.addMethod("pattern", function(value, element, param) {
 
 $("form").validate({
 	rules: {
-		//password: "required",
 		passwordagain: {
 			equalTo: "#password"
 		}
