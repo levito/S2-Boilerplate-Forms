@@ -111,9 +111,14 @@ input::-moz-focus-inner {
     border: 0;
     padding: 0;
 }
+
 .placeholder {
 	color: #999;
+	font-style: italic;
 }
+:-moz-placeholder { .placeholder; }
+::-webkit-input-placeholder { .placeholder; }
+
 input[type="text"],
 input[type="password"],
 input[type="number"],
@@ -209,7 +214,9 @@ fieldset {
 			font-size: 11px;
 			line-height: normal;
 			color: @errorcolor;
-
+			&:hover {
+				color: @errorcolor;
+			}
 			@media screen and (min-width:481px) {
 				position: absolute;
 				z-index: 1;
@@ -351,6 +358,11 @@ fieldset {
 		#transition(none);
 		background: #000;
 		color: #ccc;
+	}
+	&.disabled {
+		background: #666;
+		color: #ccc;
+		cursor: not-allowed;
 	}
 }
 .buttons {

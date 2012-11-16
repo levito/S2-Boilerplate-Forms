@@ -70,37 +70,37 @@
 			<div class="formrow">
 				<label for="firstname">Name<span class="req">*</span></label>
 				<div class="formitem col1of2">
-					<input type="text" name="firstname" id="firstname" placeholder="Vorname" required="required"/>
+					<input type="text" name="firstname" id="firstname" placeholder="Vorname" required="required" x-autocompletetype="given-name"/>
 				</div>
 				<div class="formitem col1of2">
-					<input type="text" name="lastname" id="lastname" placeholder="Nachname" required="required"/>
+					<input type="text" name="lastname" id="lastname" placeholder="Nachname" required="required" x-autocompletetype="family-name"/>
 				</div>
 			</div>
 			<div class="formrow">
 				<label for="zip">PLZ, Ort</label>
 				<div class="formitem col1of3">
-					<input type="text" name="zip" id="zip" pattern="[0-9]{5}"/>
+					<input type="text" name="zip" id="zip" pattern="[0-9]{5}" x-autocompletetype="postal-code"/>
 				</div>
 				<div class="formitem col2of3">
-					<input type="text" name="city" id="city"/>
+					<input type="text" name="city" id="city" x-autocompletetype="city"/>
 				</div>
 			</div>
 			<div class="formrow">
 				<label for="email">E-Mail und Telefon</label>
 				<div class="formitem col1of2">
-					<input type="email" name="email" id="email"/>
+					<input type="email" name="email" id="email" x-autocompletetype="email"/>
 				</div>
 				<div class="formitem col1of2">
-					<input type="tel" name="phone" id="phone"/>
+					<input type="tel" name="phone" id="phone" x-autocompletetype="tel"/>
 				</div>
 			</div>
 			<div class="formrow">
 				<label for="website">Ihre Website, Blog, Ihr Google-Plus-Profil, Twitter- oder Facebook-Profil, whatever. Extra viel Text hier um superlange Labels zu testen. Kunden tun so etwas.</label>
 				<div class="formitem col1of2">
-					<input type="url" name="website" id="website"/>
+					<input type="url" name="website" id="website" x-autocompletetype="url"/>
 				</div>
 				<div class="formitem col1of2">
-					<button type="button" class="button">Inline button</button>
+					<button type="button" class="button disabled" disabled="disabled">Inline button, disabled</button>
 				</div>
 			</div>
 			<div class="formrow">
@@ -130,7 +130,7 @@
 						<label for="rating4" class="star">
 							<span>4 Sterne</span>
 						</label>
-						<input type="radio" name="rating" value="3" id="rating3" required="required"/><!-- checked="checked" -->
+						<input type="radio" name="rating" value="3" id="rating3" required="required"/>
 						<label for="rating3" class="star">
 							<span>3 Sterne</span>
 						</label>
@@ -148,7 +148,7 @@
 			<div class="formrow">
 				<label for="country">Land</label>
 				<div class="formitem col1of2">
-					<select name="country" id="country">
+					<select name="country" id="country" x-autocompletetype="country-name">
 						<option selected="selected">bitte wählen</option>
 						<option>Deutschland</option>
 						<option>Frankreich</option>
@@ -213,21 +213,21 @@
 			<div class="formrow">
 				<div class="formitem col1of2">
 					<label for="firstname2">Vorname<span class="req">*</span></label>
-					<input type="text" name="firstname2" id="firstname2" placeholder="Vorname" required="required"/>
+					<input type="text" name="firstname2" id="firstname2" placeholder="Vorname" required="required" x-autocompletetype="given-name"/>
 				</div>
 				<div class="formitem col1of2">
 					<label for="lastname2">Nachname<span class="req">*</span></label>
-					<input type="text" name="lastname2" id="lastname2" placeholder="Nachname" required="required"/>
+					<input type="text" name="lastname2" id="lastname2" placeholder="Nachname" required="required" x-autocompletetype="family-name"/>
 				</div>
 			</div>
 			<div class="formrow">
 				<div class="formitem col1of3">
 					<label for="zip2">PLZ</label>
-					<input type="text" name="zip2" id="zip2" pattern="[0-9]{5}"/>
+					<input type="text" name="zip2" id="zip2" pattern="[0-9]{5}" x-autocompletetype="postal-code"/>
 				</div>
 				<div class="formitem col2of3">
 					<label for="city2">Ort</label>
-					<input type="text" name="city2" id="city2"/>
+					<input type="text" name="city2" id="city2" x-autocompletetype="city"/>
 				</div>
 			</div>
 			<div class="formrow">
