@@ -94,6 +94,9 @@ $.validator.addMethod("pattern", function(value, element, param) {
 }, "Ungültiges Format.");
 
 $("form").validate({
+	errorPlacement: function($err, $el) {
+		$err.appendTo($el.closest(".formitem"));
+	},
 	rules: {
 		passwordagain: {
 			equalTo: "#password"

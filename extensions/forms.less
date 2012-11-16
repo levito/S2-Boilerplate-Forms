@@ -3,12 +3,12 @@
 @errorcolor: #d23;
 @formgutterwidth: 10px;
 
-#basefont() {
+#restoreFontsize() {
 	font-size: 15px;
 	line-height: 1.333;
 	word-spacing: 0;
 }
-#removewhitespace() {
+#removeWhitespace() {
 	font-size: 0;
 	line-height: 0;
 	word-spacing: -.3em; // needed by browser with min font-size > 0, e.g. Opera
@@ -99,10 +99,10 @@ button,
 select,
 textarea {
 	#boxsizing;
-	#basefont;
-	font-family: Arial, Helvetica, sans-serif;
+	#restoreFontsize;
 
-	// fluff - set fonts and colors for both body and form elements
+	// fluff, set fonts and colors for both body and form elements
+	font-family: Arial, Helvetica, sans-serif;
 	outline: none;
 	color: #000;
 }
@@ -128,7 +128,7 @@ input[type="datetime"],
 input[type="datetime-local"],
 select,
 textarea {
-	#basefont;
+	#restoreFontsize;
 	#transition;
 	display: inline-block;
 	vertical-align: top;
@@ -172,13 +172,13 @@ fieldset {
 // common for all layouts
 .formrow {
 	#boxsizing;
-	#removewhitespace;
+	#removeWhitespace;
 	margin-left: -@formgutterwidth;
 	width: 100%;
 	label,
 	.label {
 		#boxsizing;
-		#basefont;
+		#restoreFontsize;
 		display: inline-block;
 		vertical-align: top;
 		padding: 9px 0 5px;
@@ -204,8 +204,6 @@ fieldset {
 			margin-right: -1px; // fixes rounding issues on android
 		}
 		label.error {
-			#boxsizing;
-			display: none;
 			padding: 3px 8px;
 			background: #fff;
 			font-size: 11px;
@@ -215,9 +213,8 @@ fieldset {
 			@media screen and (min-width:481px) {
 				position: absolute;
 				z-index: 1;
-				bottom: 100%;
-				left: 0;
-				margin: 0 -120px -5px 20px;
+				top: -13px;
+				right: -5px;
 				box-shadow: 0 1px 8px rgba(0,0,0,.2);
 				&:after {
 					content: "";
@@ -229,13 +226,6 @@ fieldset {
 					border-right-color: transparent;
 				}
 			}
-			@media screen and (min-width:801px) {
-				left: 100%;
-				margin: 0 -120px -5px -50px;
-			}
-		}
-		.error ~ label.error {
-			display: block;
 		}
 	}
 	@media screen and (min-width:481px) {
@@ -249,7 +239,7 @@ fieldset {
 	.rating {
 		display: inline-block;
 		padding-top: 8px;
-		padding-bottom: 8px;
+		padding-bottom: 10px;
 		width: auto;
 		white-space: nowrap;
 		.star {
@@ -278,20 +268,27 @@ fieldset {
 			.star:hover,
 			.star:hover ~ .star { #starOn; }
 		}
+		~ label.error {
+			position: relative;
+			top: 11px !important;
+			right: -15px;
+		}
 	}
 	.ticks label { // use with .formitem
+		#transition;
 		position: relative;
-		margin: 0;
+		padding-bottom: 0;
 		padding-left: 25px;
 		padding-right: 20px;
 		width: auto;
-		input[type="checkbox"],
-		input[type="radio"] {
+		color: #999;
+		&:hover { color: #666; }
+		input.checked ~ span { color: #000; } // class "checked" for IE8
+		input:checked ~ span { color: #000; } // separate to not confuse IE8
+		input.error ~ span { color: @errorcolor; }
+		input {
 			position: absolute;
 			left: 0;
-			&.error ~ span {
-				color: @errorcolor;
-			}
 		}
 	}
 }
@@ -325,28 +322,11 @@ fieldset {
 				font-weight: bold;
 			}
 		}
-		@media screen and (min-width:481px) {
-			label.error {
-				position: absolute;
-				top: 6px;
-				right: 0;
-				bottom: auto;
-				left: auto;
-				margin: 0;
+		label,
+		.label {
+			~ label.error {
+				top: 15px;
 			}
-		}
-	}
-	.ticks {
-		label {
-			padding-top: 0;
-		}
-		label.error {
-			position: absolute;
-			top: 0;
-			right: auto;
-			bottom: auto;
-			left: 100px;
-			margin: -22px -999px 0 0;
 		}
 	}
 }

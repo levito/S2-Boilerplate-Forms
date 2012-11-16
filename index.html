@@ -113,34 +113,36 @@
 				</div>
 			</div>
 			<div class="formrow">
-				<label for="message">Narchricht</label>
+				<label for="message">Narchricht<span class="req">*</span></label>
 				<div class="formitem">
-					<textarea name="message" id="message" cols="40" rows="5"></textarea>
+					<textarea name="message" id="message" cols="40" rows="5" required="required"></textarea>
 				</div>
 			</div>
 			<div class="formrow">
 				<div class="label">Ihre Bewertung<span class="req">*</span></div>
-				<div class="formitem rating">
-					<input type="radio" name="rating" value="5" id="rating5" required="required"/>
-					<label for="rating5" class="star">
-						<span>5 Sterne</span>
-					</label>
-					<input type="radio" name="rating" value="4" id="rating4" required="required"/>
-					<label for="rating4" class="star">
-						<span>4 Sterne</span>
-					</label>
-					<input type="radio" name="rating" value="3" id="rating3" required="required"/><!-- checked="checked" -->
-					<label for="rating3" class="star">
-						<span>3 Sterne</span>
-					</label>
-					<input type="radio" name="rating" value="2" id="rating2" required="required"/>
-					<label for="rating2" class="star">
-						<span>2 Sterne</span>
-					</label>
-					<input type="radio" name="rating" value="1" id="rating1" required="required"/>
-					<label for="rating1" class="star">
-						<span>1 Stern</span>
-					</label>
+				<div class="formitem">
+					<div class="rating">
+						<input type="radio" name="rating" value="5" id="rating5" required="required"/>
+						<label for="rating5" class="star">
+							<span>5 Sterne</span>
+						</label>
+						<input type="radio" name="rating" value="4" id="rating4" required="required"/>
+						<label for="rating4" class="star">
+							<span>4 Sterne</span>
+						</label>
+						<input type="radio" name="rating" value="3" id="rating3" required="required"/><!-- checked="checked" -->
+						<label for="rating3" class="star">
+							<span>3 Sterne</span>
+						</label>
+						<input type="radio" name="rating" value="2" id="rating2" required="required"/>
+						<label for="rating2" class="star">
+							<span>2 Sterne</span>
+						</label>
+						<input type="radio" name="rating" value="1" id="rating1" required="required"/>
+						<label for="rating1" class="star">
+							<span>1 Stern</span>
+						</label>
+					</div>
 				</div>
 			</div>
 			<div class="formrow">
@@ -160,8 +162,8 @@
 					<label>
 						<input type="checkbox" name="terms" class="error" required="required"/>
 						<span>Hiermit bestätige ich die <a href="javascript://">AGB</a> und erlaube Ihnen alles, was Sie wollen. Hier ist schon mal eine Error-Klasse dran, um eine serverseitige Validierung zu simulieren. Und der Text ist länger, um das Umbruch-Verhalten zu testen.</span>
-						<label for="terms" class="error">Bitte bestätigen Sie die AGB.</label>
 					</label>
+					<label for="terms" class="error">Bitte bestätigen Sie die AGB.</label>
 				</div>
 			</div>
 		</fieldset>
@@ -171,7 +173,7 @@
 			<p>Empfehlenswert für sehr kurze oder schmale Formulare</p>
 			<div class="formrow">
 				<div class="formitem">
-					<div class="label">Anrede</div>
+					<div class="label">Anrede<span class="req">*</span></div>
 					<div class="ticks">
 						<label>
 							<input type="radio" name="salutation2" value="Frau" required="required"/>
@@ -210,11 +212,11 @@
 			</div>
 			<div class="formrow">
 				<div class="formitem col1of2">
-					<label for="firstname2">Vorname</label>
+					<label for="firstname2">Vorname<span class="req">*</span></label>
 					<input type="text" name="firstname2" id="firstname2" placeholder="Vorname" required="required"/>
 				</div>
 				<div class="formitem col1of2">
-					<label for="lastname2">Nachname</label>
+					<label for="lastname2">Nachname<span class="req">*</span></label>
 					<input type="text" name="lastname2" id="lastname2" placeholder="Nachname" required="required"/>
 				</div>
 			</div>
@@ -230,8 +232,8 @@
 			</div>
 			<div class="formrow">
 				<div class="formitem">
-					<label for="message2">Narchricht</label>
-					<textarea name="message2" id="message2" cols="40" rows="5"></textarea>
+					<label for="message2">Narchricht<span class="req">*</span></label>
+					<textarea name="message2" id="message2" cols="40" rows="5" required="required"></textarea>
 				</div>
 			</div>
 			<div class="formrow">
@@ -267,16 +269,16 @@
 						<label>
 							<input type="checkbox" name="terms2" class="error" required="required"/>
 							<span>Hiermit bestätige ich die <a href="javascript://">AGB</a> und erlaube Ihnen alles, was Sie wollen. Hier ist schon mal eine Error-Klasse dran, um eine serverseitige Validierung zu simulieren. Und der Text ist länger, um das Umbruch-Verhalten zu testen.</span>
-							<label for="terms" class="error">Bitte bestätigen Sie die AGB.</label>
 						</label>
 					</div>
+					<label for="terms2" class="error">Bitte bestätigen Sie die AGB.</label>
 				</div>
 			</div>
 		</fieldset>
 
 		<div class="buttons">
-			<a href="javascript://" class="button">A link button</a>
-			<button class="button">Submit form</button>
+			<a href="javascript://" class="button">Link button</a>
+			<button class="button">Submit</button>
 		</div>
 	</form>
 
