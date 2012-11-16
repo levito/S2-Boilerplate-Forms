@@ -57,8 +57,6 @@ if (!("placeholder" in document.createElement("input"))) {
 		$clone.focus(function() {
 			var $placeholder = $(this);
 			var $input = $placeholder.data("orig-input");
-			var placeholderValue = $placeholder.val();
-			$placeholder.hide().val("").val(placeholderValue); // opera text selection fix
 			$input.show().focus();
 		});
 		$input.blur(function() {

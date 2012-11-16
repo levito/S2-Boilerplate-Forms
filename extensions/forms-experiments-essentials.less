@@ -1,0 +1,254 @@
+@charset "UTF-8";
+
+@errorcolor: #d00;
+@formgutterwidth: 10px;
+
+#basefont() {
+	font-size: 13px;
+	line-height: 1.333;
+	word-spacing: 0;
+}
+#removewhitespace() {
+	font-size: 0;
+	line-height: 0;
+	word-spacing: -.3em; // needed by browser with min font-size > 0, e.g. Opera
+}
+#boxsizing(@model: border-box) {
+	-moz-box-sizing: @model;
+	box-sizing: @model;
+}
+#visuallyHidden() {
+	position: absolute;
+	z-index: -1;
+	opacity: 0;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	border: 0;
+	clip: rect(0 0 0 0);
+	overflow: hidden;
+}
+
+#starOn() {
+	&:before { content: "\2605"; }
+}
+#starOff() {
+	&:before { content: "\2606"; }
+}
+
+body,
+input,
+button,
+select,
+textarea {
+	#boxsizing;
+	#basefont;
+	font-family: sans-serif;
+}
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
+.placeholder {
+	color: #999;
+}
+input[type="text"],
+input[type="password"],
+input[type="number"],
+input[type="tel"],
+input[type="email"],
+input[type="url"],
+input[type="date"],
+input[type="time"],
+input[type="month"],
+input[type="week"],
+input[type="datetime"],
+input[type="datetime-local"],
+select,
+textarea {
+	#basefont;
+	display: inline-block;
+	vertical-align: top;
+	margin: 0;
+	width: 100%;
+	line-height: normal;
+	&.error {
+		border-color: @errorcolor;
+		color: @errorcolor;
+	}
+}
+textarea {
+	overflow-y: auto; // IE fix for consistency
+}
+
+// common for all layouts
+.formrow {
+
+	// basics, common and small screen
+	@labelwidth: 25%;
+	@indent: @labelwidth / (100% - @labelwidth) * 100;
+	#boxsizing;
+	#removewhitespace;
+	margin-left: -@formgutterwidth;
+	width: 100%;
+
+	.label,
+	.formitem {
+		#boxsizing;
+		#basefont;
+		display: inline-block;
+		vertical-align: top;
+	}
+	.label {
+		padding-left: @formgutterwidth;
+		label {
+			&:after { content: ", "; }
+			&:last-child:after { content: ""; }
+		}
+	}
+	.formitem {
+		padding: 0 0 1em @formgutterwidth;
+		width: 100%;
+		label.error {
+			#boxsizing;
+			display: none;
+			color: @errorcolor;
+		}
+		.error ~ label.error {
+			display: block;
+		}
+	}
+
+	@media screen and (min-width:481px) {
+		display: table;
+		.col1of1 { width: 100%; }
+		.col1of2 { width: 50%; }
+		.col1of3 { width: 33.33%; }
+		.col2of3 { width: 66.66%; }
+		.col1of4 { width: 25%; }
+		.col3of4 { width: 75%; }
+		> .label,
+		> .formitems {
+			display: table-row;
+			width: 100%;
+		}
+		> .label label,
+		.formitem {
+			display: table-cell;
+			padding-left: @formgutterwidth;
+		}
+		> .label label { vertical-align: bottom; }
+		.label label:after { content: ""; }
+		// .formitems:after {
+		// 	content: "";
+		// 	display: table-cell;
+		// 	width: 9999px;
+		// }
+	}
+
+	@media screen and (min-width:801px) {
+		padding-left: @labelwidth;
+		display: block;
+		> .label,
+		> .formitems,
+		.formitem {
+			display: inline-block;
+		}
+		> .label {
+			margin-left: -@indent;
+			padding-left: @formgutterwidth;
+			padding-bottom: 1em;
+			width: @indent;
+			label {
+				display: inline;
+				padding-left: 0;
+				&:after { content: ", "; }
+				&:last-child:after { content: ""; }
+			}
+		}
+	}
+
+	// content
+	.rating {
+		display: inline-block;
+		width: auto;
+		white-space: nowrap;
+		.star {
+			#starOff;
+			float: right; // direction:rtl and non-static positioning of input breaks in IE8
+			margin: 0;
+			padding: 0;
+			width: 24px;
+			height: 24px;
+			font-size: 24px;
+			line-height: 1;
+			cursor: pointer;
+			span {
+				display: none;
+			}
+		}
+		input { #visuallyHidden; }
+		.star:hover,
+		.star:hover ~ .star,
+		input.checked ~ .star { #starOn; } // class "checked" for IE8
+		input:checked ~ .star { #starOn; } // separate to not confuse IE8
+		&:hover {
+			input {
+				~ .star { #starOff; }
+			}
+			.star:hover,
+			.star:hover ~ .star { #starOn; }
+		}
+		label.error {
+			position: absolute;
+			left: 100%;
+			margin-left: 1em;
+		}
+	}
+	.ticks {
+		label { // use with .formitem
+			position: relative;
+			margin: 0;
+			padding-left: 25px;
+			padding-right: 20px;
+			width: auto;
+			input[type="checkbox"],
+			input[type="radio"] {
+				position: absolute;
+				left: 0;
+				&.error ~ span {
+					color: @errorcolor;
+				}
+			}
+		}
+		label.error {
+			display: block;
+			padding: 0;
+		}
+	}
+}
+
+
+// buttons
+.button {
+	display: inline-block;
+	margin: 0 10px 0 0;
+	border: 1px outset;
+	padding: 1px 10px;
+	text-decoration: none;
+	background: #ccc;
+	color: #000;
+	cursor: pointer;
+	&:active {
+		border: 1px inset;
+	}
+}
+.buttons {
+	text-align: right;
+	.button {
+		margin-left: 10px;
+		margin-right: 0;
+	}
+}
