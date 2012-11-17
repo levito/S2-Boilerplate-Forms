@@ -1,10 +1,10 @@
 @charset "UTF-8";
 
-@errorcolor: #d00;
+@errorcolor: #d23;
 @formgutterwidth: 10px;
 
 #restoreFontsize() {
-	font-size: 13px;
+	font-size: 15px;
 	line-height: 1.333;
 	word-spacing: 0;
 }
@@ -16,6 +16,11 @@
 #boxsizing(@model: border-box) {
 	-moz-box-sizing: @model;
 	box-sizing: @model;
+}
+#transition(@params: all .2s) {
+	-moz-transition: @params;
+	-webkit-transition: @params;
+	transition: @params;
 }
 #visuallyHidden() {
 	position: absolute;
@@ -31,12 +36,62 @@
 }
 
 #starOn() {
+	#transition;
+	color: #000;
 	&:before { content: "\2605"; }
 }
 #starOff() {
-	&:before { content: "\2606"; }
+	#transition;
+	color: #ccc;
+	&:before { content: "\2605"; }
 }
 
+body {
+	max-width: 1280px;
+	margin: 0 auto;
+	padding: 20px;
+	background: #f2f2f2;
+	@media screen and (min-width:481px) {
+		padding: 40px;
+	}
+	@media screen and (min-width:801px) {
+		padding: 80px;
+	}
+}
+a {
+	#transition;
+	color: #38d;
+	&:hover {
+		color: #6af;
+	}
+}
+h1, h2, h3 {
+	font-family: Georgia, serif;
+}
+h1 {
+	margin-top: 0;
+	text-align: center;
+	text-transform: uppercase;
+	font-size: 2em;
+	@media screen and (min-width:481px) {
+		font-size: 3em;
+		letter-spacing: -1px;
+	}
+	&:after {
+		content: "❦";
+		display: block;
+		margin: .3em 0 1.3em;
+		text-align: center;
+		font-weight: normal;
+	}
+	span {
+		display: block;
+		font-size: 40%;
+		text-transform: none;
+		font-weight: normal;
+		letter-spacing: 0;
+	}
+}
 body,
 input,
 button,
@@ -45,6 +100,11 @@ textarea {
 	#boxsizing;
 	#restoreFontsize;
 	font-family: sans-serif;
+
+	// fluff, set fonts and colors for both body and form elements
+	font-family: Arial, Helvetica, sans-serif;
+	outline: none;
+	color: #000;
 }
 button::-moz-focus-inner,
 input::-moz-focus-inner {
@@ -53,7 +113,12 @@ input::-moz-focus-inner {
 }
 .placeholder {
 	color: #999;
+	font-style: italic;
 }
+:-moz-placeholder { .placeholder; }
+::-webkit-input-placeholder { .placeholder; }
+::-ms-input-placeholder { .placeholder; }
+
 input[type="text"],
 input[type="password"],
 input[type="number"],
@@ -69,11 +134,22 @@ input[type="datetime-local"],
 select,
 textarea {
 	#restoreFontsize;
+	#transition;
 	display: inline-block;
 	vertical-align: top;
 	margin: 0;
 	width: 100%;
 	line-height: normal;
+
+	// fluff
+	border: none;
+	border-bottom: 1px solid #000;
+	background: #f2f2f2;
+	padding: 10px;
+	&:focus {
+		box-shadow: inset 0 1px 4px rgba(0,0,0,.1);
+		background: #f8f8f8;
+	}
 	&.error {
 		border-color: @errorcolor;
 		color: @errorcolor;
@@ -82,39 +158,87 @@ textarea {
 textarea {
 	overflow-y: auto; // IE fix for consistency
 }
+fieldset {
+	margin: 20px -20px;
+	border: none;
+	padding: 15px 20px-@formgutterwidth 15px 20px;
+	@media screen and (min-width:481px) {
+		margin: 40px 0;
+		padding: 30px 40px-@formgutterwidth 30px 40px;
+	}
+	// fluff
+	box-shadow: 0 2px 20px rgba(0,0,0,.1);
+	background: #fff;
+	.legend { // use with headlines; legend element is a bitch to style
+		margin-top: 0;
+	}
+}
 
 .formrow {
 
 	// basics, common and small screen
-	@labelwidth: 25%;
-	@indent: @labelwidth / (100% - @labelwidth) * 100;
+	@labelwidth: 200px; //25%;
+	@indent: 200px; //@labelwidth / (100% - @labelwidth) * 100;
 	#boxsizing;
 	#removewhitespace;
 	margin-left: -@formgutterwidth;
 	width: 100%;
 
 	.label,
-	.formitem {
+	.label label,
+	.formitem,
+	.ticks label,
+	.rating {
 		#boxsizing;
 		display: inline-block;
 		vertical-align: top;
+		padding: 9px 0 5px;
 	}
 	.label {
 		#removewhitespace;
 		padding-left: @formgutterwidth;
 		label {
 			#restoreFontsize;
+			font-size: 11px;
+			font-weight: bold;
+			.req {
+				color: @errorcolor;
+			}
 			&:before { content: ", "; }
 			&:first-child:before { content: ""; }
 		}
 	}
 	.formitem {
 		#restoreFontsize;
-		padding: 0 0 1em @formgutterwidth;
+		position: relative;
+		padding: 0 0 10px @formgutterwidth;
 		width: 100%;
 		label.error {
 			display: block;
+			padding: 3px 8px;
+			background: #fff;
+			font-size: 11px;
+			line-height: normal;
 			color: @errorcolor;
+			&:hover {
+				color: @errorcolor;
+			}
+			@media screen and (min-width:801px) {
+				position: absolute;
+				z-index: 1;
+				top: -13px;
+				right: -5px;
+				box-shadow: 0 1px 8px rgba(0,0,0,.2);
+				&:after {
+					content: "";
+					position: absolute;
+					bottom: 0;
+					left: 0;
+					border: 4px solid @errorcolor;
+					border-top-color: transparent;
+					border-right-color: transparent;
+				}
+			}
 		}
 	}
 
@@ -148,7 +272,7 @@ textarea {
 	}
 
 	@media screen and (min-width:801px) {
-		padding-left: @labelwidth;
+		padding: 0 0 20px @labelwidth;
 		display: block;
 		> .label,
 		> .formitems,
@@ -158,7 +282,7 @@ textarea {
 		> .label {
 			margin-left: -@indent;
 			padding-left: @formgutterwidth;
-			padding-bottom: 1em;
+			padding-bottom: 10px;
 			width: @indent;
 			label {
 				display: inline;
@@ -171,7 +295,6 @@ textarea {
 
 	// content
 	.rating {
-		display: inline-block;
 		width: auto;
 		white-space: nowrap;
 		.star {
@@ -200,32 +323,25 @@ textarea {
 			.star:hover,
 			.star:hover ~ .star { #starOn; }
 		}
-		label.error {
-			position: absolute;
-			left: 100%;
-			margin-left: 1em;
-		}
 	}
 	.ticks {
 		label { // use with .formitem
+			#transition;
 			display: inline-block;
 			position: relative;
-			margin: 0;
+			padding-bottom: 0;
 			padding-left: 25px;
 			padding-right: 20px;
 			width: auto;
-			input[type="checkbox"],
-			input[type="radio"] {
+			color: #999;
+			&:hover { color: #666; }
+			input.checked ~ span { color: #000; } // class "checked" for IE8
+			input:checked ~ span { color: #000; } // separate to not confuse IE8
+			input.error ~ span { color: @errorcolor; }
+			input {
 				position: absolute;
 				left: 0;
-				&.error ~ span {
-					color: @errorcolor;
-				}
 			}
-		}
-		label.error {
-			display: block;
-			padding: 0;
 		}
 	}
 }
@@ -233,16 +349,29 @@ textarea {
 
 // buttons
 .button {
+	#transition;
 	display: inline-block;
 	margin: 0 10px 0 0;
-	border: 1px outset;
-	padding: 1px 10px;
+	border: none;
+	padding: 9px 30px;
 	text-decoration: none;
-	background: #ccc;
-	color: #000;
+	background: #000;
+	color: #fff;
 	cursor: pointer;
+	&:hover,
+	&:focus {
+		background: #333;
+		color: #fff;
+	}
 	&:active {
-		border: 1px inset;
+		#transition(none);
+		background: #000;
+		color: #ccc;
+	}
+	&.disabled {
+		background: #666;
+		color: #ccc;
+		cursor: not-allowed;
 	}
 }
 .buttons {
