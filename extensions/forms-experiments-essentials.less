@@ -3,7 +3,7 @@
 @errorcolor: #d00;
 @formgutterwidth: 10px;
 
-#basefont() {
+#restoreFontsize() {
 	font-size: 13px;
 	line-height: 1.333;
 	word-spacing: 0;
@@ -43,7 +43,7 @@ button,
 select,
 textarea {
 	#boxsizing;
-	#basefont;
+	#restoreFontsize;
 	font-family: sans-serif;
 }
 button::-moz-focus-inner,
@@ -68,7 +68,7 @@ input[type="datetime"],
 input[type="datetime-local"],
 select,
 textarea {
-	#basefont;
+	#restoreFontsize;
 	display: inline-block;
 	vertical-align: top;
 	margin: 0;
@@ -97,18 +97,20 @@ textarea {
 	.label,
 	.formitem {
 		#boxsizing;
-		#basefont;
 		display: inline-block;
 		vertical-align: top;
 	}
 	.label {
+		#removewhitespace;
 		padding-left: @formgutterwidth;
 		label {
-			&:after { content: ", "; }
-			&:last-child:after { content: ""; }
+			#restoreFontsize;
+			&:before { content: ", "; }
+			&:first-child:before { content: ""; }
 		}
 	}
 	.formitem {
+		#restoreFontsize;
 		padding: 0 0 1em @formgutterwidth;
 		width: 100%;
 		label.error {
@@ -139,8 +141,10 @@ textarea {
 			display: table-cell;
 			padding-left: @formgutterwidth;
 		}
-		> .label label { vertical-align: bottom; }
-		.label label:after { content: ""; }
+		> .label label {
+			vertical-align: bottom;
+		}
+		.label label:before { content: ""; }
 		// .formitems:after {
 		// 	content: "";
 		// 	display: table-cell;
@@ -164,8 +168,8 @@ textarea {
 			label {
 				display: inline;
 				padding-left: 0;
-				&:after { content: ", "; }
-				&:last-child:after { content: ""; }
+				&:before { content: ", "; }
+				&:first-child:before { content: ""; }
 			}
 		}
 	}
@@ -209,6 +213,7 @@ textarea {
 	}
 	.ticks {
 		label { // use with .formitem
+			display: inline-block;
 			position: relative;
 			margin: 0;
 			padding-left: 25px;

@@ -3,7 +3,7 @@
 @errorcolor: #d00;
 @formgutterwidth: 10px;
 
-#basefont() {
+#restoreFontsize() {
 	font-size: 13px;
 	line-height: 1.333;
 	word-spacing: 0;
@@ -43,7 +43,7 @@ button,
 select,
 textarea {
 	#boxsizing;
-	#basefont;
+	#restoreFontsize;
 	font-family: sans-serif;
 }
 button::-moz-focus-inner,
@@ -68,7 +68,7 @@ input[type="datetime"],
 input[type="datetime-local"],
 select,
 textarea {
-	#basefont;
+	#restoreFontsize;
 	display: inline-block;
 	vertical-align: top;
 	margin: 0;
@@ -92,7 +92,7 @@ textarea {
 	label,
 	.label {
 		#boxsizing;
-		#basefont;
+		#restoreFontsize;
 		display: inline-block;
 		vertical-align: top;
 	}
@@ -103,7 +103,7 @@ textarea {
 	}
 	.formitem {
 		#boxsizing;
-		#basefont;
+		#restoreFontsize;
 		position: relative;
 		display: inline-block;
 		vertical-align: top;
