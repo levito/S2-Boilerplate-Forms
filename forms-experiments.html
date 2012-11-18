@@ -20,7 +20,10 @@
 	<ul>
 		<li>Breite Unabhängig vom Container (prozentuale Feldbreiten, keine festen Pixel)</li>
 		<li>Responsive, linearisierbar, mobile-ready</li>
-		<li>2 Varianten: Labels links und Labels oben</li>
+		<li>
+			<del>2 Varianten: Labels links und Labels oben</del>
+			<ins>1 Codebasis für 3 Layouts (Labels links, Labels oben, komplett linearisiert)</ins>
+		</li>
 		<li>Robust gegenüber mehrzeiligen Labels</li>
 		<li>Clientseitige Validierung mit HTML5 und JavaScript-Unterstützung</li>
 		<li>Inline-Fehlermeldungen</li>
@@ -206,6 +209,30 @@
 				</div>
 			</div>
 		</fieldset>
+
+		<h3>Toggle/switch buttons with checkbox and radio</h3>
+		<div class="buttons">
+
+			<label class="togglebutton">
+				<input type="checkbox"/>
+				<span>Toggle</span>
+			</label>
+
+			<div class="togglebutton">
+				<label>
+					<input type="radio" name="radiobutton" value="rb1">
+					<span>Radio 1</span>
+				</label>
+				<label>
+					<input type="radio" name="radiobutton" value="rb2">
+					<span>Radio 2</span>
+				</label>
+				<label>
+					<input type="radio" name="radiobutton" value="rb3">
+					<span>Radio 3</span>
+				</label>
+			</div>
+		</div>
 
 		<div class="buttons">
 			<a href="javascript://" class="button">Link button</a>

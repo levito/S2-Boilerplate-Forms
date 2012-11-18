@@ -8,7 +8,7 @@
 	line-height: 1.333;
 	word-spacing: 0;
 }
-#removewhitespace() {
+#removeWhitespace() {
 	font-size: 0;
 	line-height: 0;
 	word-spacing: -.3em; // needed by browser with min font-size > 0, e.g. Opera
@@ -64,6 +64,13 @@ a {
 	&:hover {
 		color: #6af;
 	}
+}
+del {
+	color: #999;
+}
+ins {
+	background: #ffd;
+	text-decoration: none;
 }
 h1, h2, h3 {
 	font-family: Georgia, serif;
@@ -180,7 +187,7 @@ fieldset {
 	@labelwidth: 200px; //25%;
 	@indent: 200px; //@labelwidth / (100% - @labelwidth) * 100;
 	#boxsizing;
-	#removewhitespace;
+	#removeWhitespace;
 	margin-left: -@formgutterwidth;
 	width: 100%;
 
@@ -195,10 +202,11 @@ fieldset {
 		padding: 9px 0 5px;
 	}
 	.label {
-		#removewhitespace;
+		#removeWhitespace;
 		padding-left: @formgutterwidth;
 		label {
 			#restoreFontsize;
+			display: inline;
 			font-size: 11px;
 			font-weight: bold;
 			.req {
@@ -255,6 +263,9 @@ fieldset {
 			display: table-row;
 			width: 100%;
 		}
+	}
+
+	@media screen and (min-width:481px) and (max-width:800px) {
 		> .label label,
 		.formitem {
 			display: table-cell;
@@ -264,11 +275,6 @@ fieldset {
 			vertical-align: bottom;
 		}
 		.label label:before { content: ""; }
-		// .formitems:after {
-		// 	content: "";
-		// 	display: table-cell;
-		// 	width: 9999px;
-		// }
 	}
 
 	@media screen and (min-width:801px) {
@@ -284,12 +290,6 @@ fieldset {
 			padding-left: @formgutterwidth;
 			padding-bottom: 10px;
 			width: @indent;
-			label {
-				display: inline;
-				padding-left: 0;
-				&:before { content: ", "; }
-				&:first-child:before { content: ""; }
-			}
 		}
 	}
 
@@ -348,10 +348,16 @@ fieldset {
 
 
 // buttons
+.button,
+.togglebutton {
+	margin: 0 10px 0 0;
+	-webkit-user-select: none;
+	user-select: none;
+}
+
 .button {
 	#transition;
 	display: inline-block;
-	margin: 0 10px 0 0;
 	border: none;
 	padding: 9px 30px;
 	text-decoration: none;
@@ -374,10 +380,39 @@ fieldset {
 		cursor: not-allowed;
 	}
 }
+// toggle buttons
+.togglebutton {
+	display: inline-block;
+	label + label > span {
+		border-left: 1px solid #666;
+	}
+	input {
+		#visuallyHidden;
+		+ span {
+			.button;
+			margin: 0;
+		}
+		&:checked + span {
+			background: #38d;
+			&:hover {
+				background: #6af;
+			}
+		}
+		&.checked + span {
+			background: #38d;
+			&:hover {
+				background: #6af;
+			}
+		}
+	}
+}
+
 .buttons {
+	#removeWhitespace;
 	text-align: right;
-	.button {
-		margin-left: 10px;
-		margin-right: 0;
+	margin: 0 -10px 20px 0;
+	.button,
+	.togglebutton span {
+		#restoreFontsize;
 	}
 }

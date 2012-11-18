@@ -8,7 +8,7 @@
 	line-height: 1.333;
 	word-spacing: 0;
 }
-#removewhitespace() {
+#removeWhitespace() {
 	font-size: 0;
 	line-height: 0;
 	word-spacing: -.3em; // needed by browser with min font-size > 0, e.g. Opera
@@ -89,7 +89,7 @@ textarea {
 	@labelwidth: 25%;
 	@indent: @labelwidth / (100% - @labelwidth) * 100;
 	#boxsizing;
-	#removewhitespace;
+	#removeWhitespace;
 	margin-left: -@formgutterwidth;
 	width: 100%;
 
@@ -100,10 +100,11 @@ textarea {
 		vertical-align: top;
 	}
 	.label {
-		#removewhitespace;
+		#removeWhitespace;
 		padding-left: @formgutterwidth;
 		label {
 			#restoreFontsize;
+			display: inline;
 			&:before { content: ", "; }
 			&:first-child:before { content: ""; }
 		}
@@ -131,6 +132,9 @@ textarea {
 			display: table-row;
 			width: 100%;
 		}
+	}
+
+	@media screen and (min-width:481px) and (max-width:800px) {
 		> .label label,
 		.formitem {
 			display: table-cell;
@@ -140,11 +144,6 @@ textarea {
 			vertical-align: bottom;
 		}
 		.label label:before { content: ""; }
-		// .formitems:after {
-		// 	content: "";
-		// 	display: table-cell;
-		// 	width: 9999px;
-		// }
 	}
 
 	@media screen and (min-width:801px) {
@@ -160,12 +159,6 @@ textarea {
 			padding-left: @formgutterwidth;
 			padding-bottom: 1em;
 			width: @indent;
-			label {
-				display: inline;
-				padding-left: 0;
-				&:before { content: ", "; }
-				&:first-child:before { content: ""; }
-			}
 		}
 	}
 
