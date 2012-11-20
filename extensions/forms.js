@@ -54,12 +54,13 @@ if (!("placeholder" in document.createElement("input"))) {
 			$input.show();
 		}
 
-		$clone.focus(function() {
+		$clone.on("focus", function() {
 			var $placeholder = $(this);
 			var $input = $placeholder.data("orig-input");
+			$clone.hide();
 			$input.show().focus();
 		});
-		$input.blur(function() {
+		$input.on("blur", function() {
 			if (this.value == "") {
 				var $placeholder = $input.data("placeholder-input");
 				$input.hide();
