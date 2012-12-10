@@ -277,11 +277,11 @@ fieldset {
 			.star:hover,
 			.star:hover ~ .star { #starOn; }
 		}
-		~ label.error {
-			position: relative;
-			top: 11px !important;
-			right: -15px;
-		}
+		// ~ label.error {
+		// 	position: relative;
+		// 	top: 8px !important;
+		// 	right: -15px;
+		// }
 	}
 	.ticks label { // use with .formitem
 		#transition;
@@ -341,10 +341,23 @@ fieldset {
 
 
 // buttons
+.button,
+.togglebutton {
+	margin: 0 10px 10px 0;
+	-webkit-user-select: none;
+	user-select: none;
+}
+.formitem {
+	.button,
+	.togglebutton {
+		margin-bottom: 0;
+	}
+}
+
 .button {
 	#transition;
+	#restoreFontsize;
 	display: inline-block;
-	margin: 0 10px 0 0;
 	border: none;
 	padding: 9px 30px;
 	text-decoration: none;
@@ -367,10 +380,36 @@ fieldset {
 		cursor: not-allowed;
 	}
 }
-.buttons {
-	text-align: right;
-	.button {
-		margin-left: 10px;
-		margin-right: 0;
+// toggle buttons
+.togglebutton {
+	#removeWhitespace;
+	display: inline-block;
+	label + label > span {
+		border-left: 1px solid #666;
 	}
+	input {
+		#visuallyHidden;
+		+ span {
+			.button;
+			margin: 0;
+		}
+		&:checked + span {
+			background: #38d;
+			&:hover {
+				background: #6af;
+			}
+		}
+		&.checked + span {
+			background: #38d;
+			&:hover {
+				background: #6af;
+			}
+		}
+	}
+}
+
+.buttons {
+	#removeWhitespace;
+	text-align: right;
+	margin: 0 -10px 20px 0;
 }
