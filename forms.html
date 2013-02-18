@@ -79,7 +79,7 @@
 			<div class="formrow">
 				<label for="zip">PLZ, Ort</label>
 				<div class="formitem col1of3">
-					<input type="text" name="zip" id="zip" pattern="[0-9]{5}" x-autocompletetype="postal-code"/>
+					<input type="text" name="zip" id="zip" pattern="\d*" x-autocompletetype="postal-code"/>
 				</div>
 				<div class="formitem col2of3">
 					<input type="text" name="city" id="city" x-autocompletetype="city"/>
@@ -223,7 +223,7 @@
 			<div class="formrow">
 				<div class="formitem col1of3">
 					<label for="zip2">PLZ</label>
-					<input type="text" name="zip2" id="zip2" pattern="[0-9]{5}" x-autocompletetype="postal-code"/>
+					<input type="text" name="zip2" id="zip2" pattern="\d*" x-autocompletetype="postal-code"/>
 				</div>
 				<div class="formitem col2of3">
 					<label for="city2">Ort</label>
