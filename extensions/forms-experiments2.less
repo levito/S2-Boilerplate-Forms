@@ -175,8 +175,6 @@ fieldset {
 
 // common for all layouts
 .formrow {
-	@labelwidth: 200px;
-	@indent: 200px; //@labelwidth / (100% - @labelwidth) * 100;
 	#boxsizing;
 	#removeWhitespace;
 	margin-left: -@formgutterwidth;
@@ -222,9 +220,7 @@ fieldset {
 			display: inline-block;
 			position: relative;
 			margin: 0;
-			padding-bottom: 0;
-			padding-left: 20px;
-			padding-right: 15px;
+			padding: 9px 20px 0 25px;
 			width: auto;
 			color: #999;
 			&:hover { color: #666; }
@@ -291,7 +287,9 @@ fieldset {
 		.col3of4 { width: 75%; }
 	}
 	@media screen and (min-width:801px) {
-		padding-left: @labelwidth;
+		@labelwidth: 250px;
+		@indent: 250px; //@labelwidth / (100% - @labelwidth) * 100;
+		padding: 0 0 20px @labelwidth;
 		.label {
 			float: left;
 			margin-left: -@indent;
@@ -304,7 +302,7 @@ fieldset {
 // labels on top
 .compact {
 	.formrow {
-		padding-left: 0;
+		padding: 0;
 	}
 	.formitem {
 		.label {
