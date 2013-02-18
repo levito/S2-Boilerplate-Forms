@@ -196,13 +196,13 @@ fieldset {
 		#boxsizing;
 		position: relative;
 		display: inline-block;
+		vertical-align: baseline;
 		padding: 0 0 10px @formgutterwidth;
 		width: 100%;
 		&:last-child {
 			margin-right: -1px; // fixes rounding issues on android
 		}
 		label.error {
-			clear: left;
 			float: left;
 			padding: 3px 8px;
 			background: #fff;
@@ -232,7 +232,7 @@ fieldset {
 	}
 	.ticks {
 		#restoreFontsize;
-		display: inline-block;
+		display: inline;
 		vertical-align: top;
 		label { // use with .formitem
 			#transition;
@@ -296,6 +296,19 @@ fieldset {
 		.col2of3 { width: 66.66%; }
 		.col1of4 { width: 25%; }
 		.col3of4 { width: 75%; }
+		.ticks,
+		.rating {
+			~ label.error {
+				float: none;
+				display: inline-block;
+				vertical-align: top;
+				position: relative;
+				top: 10px;
+				right: auto;
+				bottom: auto;
+				left: 10px;
+			}
+		}
 	}
 	@media screen and (min-width:801px) {
 		@labelwidth: 250px;

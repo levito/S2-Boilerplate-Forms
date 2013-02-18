@@ -102,6 +102,7 @@ textarea {
 		#boxsizing;
 		position: relative;
 		display: inline-block;
+		vertical-align: baseline;
 		padding: 0 0 15px @formgutterwidth;
 		width: 100%;
 		&:last-child {
@@ -109,14 +110,14 @@ textarea {
 		}
 		label.error {
 			#restoreFontsize;
-			clear: left;
 			float: left;
+			width: 100%;
 			color: @errorcolor;
 		}
 	}
 	.ticks {
 		#restoreFontsize();
-		display: block;
+		display: inline-block;
 		label { // use with .formitem
 			display: inline-block;
 			position: relative;
@@ -136,7 +137,7 @@ textarea {
 		}
 	}
 	.rating {
-		float: left;
+		display: inline-block;
 		width: auto;
 		white-space: nowrap;
 		.star {
@@ -164,6 +165,10 @@ textarea {
 			}
 			.star:hover,
 			.star:hover ~ .star { #starOn; }
+		}
+		~ label.error {
+			float: none;
+			display: inline-block;
 		}
 	}
 	@media screen and (min-width:481px) {
