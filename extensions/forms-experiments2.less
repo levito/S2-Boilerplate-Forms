@@ -210,10 +210,26 @@ fieldset {
 			&:hover {
 				color: @errorcolor;
 			}
+			@media screen and (min-width:481px) {
+				position: absolute;
+				z-index: 1;
+				bottom: -5px;
+				right: -5px;
+				box-shadow: 0 1px 8px rgba(0,0,0,.2);
+				&:after {
+					content: "";
+					position: absolute;
+					top: 0;
+					left: 0;
+					border: 4px solid @errorcolor;
+					border-bottom-color: transparent;
+					border-right-color: transparent;
+				}
+			}
 		}
 	}
 	.ticks {
-		#restoreFontsize();
+		#restoreFontsize;
 		display: block;
 		label { // use with .formitem
 			#transition;
@@ -237,7 +253,6 @@ fieldset {
 		}
 		label.error {
 			display: block;
-			padding: 0;
 		}
 	}
 	.rating {
@@ -372,11 +387,21 @@ fieldset {
 			&:hover {
 				background: #6af;
 			}
+			&:active {
+				#transition(none);
+				background: #38d;
+				color: #fff;
+			}
 		}
 		&.checked + span {
 			background: #38d;
 			&:hover {
 				background: #6af;
+			}
+			&:active {
+				#transition(none);
+				background: #38d;
+				color: #fff;
 			}
 		}
 	}
@@ -386,4 +411,12 @@ fieldset {
 	#removeWhitespace;
 	text-align: right;
 	margin: 0 -10px 20px 0;
+	overflow: hidden; // as a simple clearfix
+	.forth {
+		float: right;
+	}
+	.back {
+		overflow: hidden; // as float filler
+		text-align: left;
+	}
 }
