@@ -200,7 +200,7 @@ fieldset {
 		padding: 0 0 10px @formgutterwidth;
 		width: 100%;
 		&:last-child {
-			margin-right: -1px; // fixes rounding issues on android
+			margin-right: -9px; // fixes rounding issues on android and older webkits
 		}
 		label.error {
 			float: left;
@@ -314,6 +314,9 @@ fieldset {
 		@labelwidth: 250px;
 		@indent: 250px; //@labelwidth / (100% - @labelwidth) * 100;
 		padding: 0 0 20px @labelwidth;
+		.formitem {
+			vertical-align: top; // needed for older webkits (e.g. Safari 5)
+		}
 		.label {
 			float: left;
 			margin-left: -@indent;
@@ -329,6 +332,7 @@ fieldset {
 		padding: 0;
 	}
 	.formitem {
+		vertical-align: baseline; // // restore for older webkits
 		.label {
 			float: none;
 			width: 100%;

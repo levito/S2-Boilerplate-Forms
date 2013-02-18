@@ -106,7 +106,7 @@ textarea {
 		padding: 0 0 15px @formgutterwidth;
 		width: 100%;
 		&:last-child {
-			margin-right: -1px; // fixes rounding issues on android
+			margin-right: -9px; // fixes rounding issues on android and older webkits
 		}
 		label.error {
 			#restoreFontsize;
@@ -181,6 +181,9 @@ textarea {
 	}
 	@media screen and (min-width:801px) {
 		padding-left: @labelwidth;
+		.formitem {
+			vertical-align: top; // needed for older webkits (e.g. Safari 5)
+		}
 		.label {
 			float: left;
 			margin-left: -@indent;
@@ -195,6 +198,7 @@ textarea {
 		padding-left: 0;
 	}
 	.formitem {
+		vertical-align: baseline; // bottom; // restore for older webkits
 		.label {
 			float: none;
 			width: 100%;
