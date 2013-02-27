@@ -185,7 +185,7 @@ fieldset {
 		#restoreFontsize;
 		display: inline-block;
 		padding: 9px 0 5px;
-		width: auto;
+		width: 100%;
 		font-size: 11px;
 		font-weight: bold;
 		.req {
@@ -291,21 +291,11 @@ fieldset {
 	}
 	@media screen and (min-width:481px) {
 		.col1of1 { width: 100%; }
-		.col1of2 { width: 50%;
-			.label { width:200%; margin-right: -100%; }
-		}
-		.col1of3 { width: 33.33%;
-			.label { width:300%; margin-right: -200%; }
-		}
-		.col2of3 { width: 66.66%;
-			.label { width:150%; margin-right: -50%; }
-		}
-		.col1of4 { width: 25%;
-			.label { width:400%; margin-right: -300%; }
-		}
-		.col3of4 { width: 75%;
-			.label { width:133.33%; margin-right: -33.33%; }
-		}
+		.col1of2 { width: 50%; }
+		.col1of3 { width: 33.33%; }
+		.col2of3 { width: 66.66%; }
+		.col1of4 { width: 25%; }
+		.col3of4 { width: 75%; }
 		.ticks,
 		.rating {
 			~ label.error {
@@ -331,10 +321,7 @@ fieldset {
 			float: left;
 			margin-left: -@indent;
 			padding-right: @formgutterwidth;
-		}
-		.formitem .label { // raise specifity to override .colXofY .label
 			width: @indent;
-			margin-right: 0;
 		}
 	}
 }
@@ -350,7 +337,6 @@ fieldset {
 			float: none;
 			width: 100%;
 			margin-left: 0;
-			margin-right: 0;
 		}
 	}
 }
@@ -442,7 +428,6 @@ fieldset {
 	overflow: hidden; // as a simple clearfix
 	.forth {
 		float: right;
-		max-width: 60%;
 	}
 	.back {
 		overflow: hidden; // as float filler
