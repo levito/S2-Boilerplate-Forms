@@ -75,60 +75,60 @@
 				</div>
 			</div>
 			<div class="formrow">
-				<label class="label req" for="firstname">Vor- und Nachname</label>
-				<div class="formitem col1of2">
-					<label class="label req" for="firstname">Vorname</label>
-					<input type="text" name="firstname" id="firstname" placeholder="Vorname" required="required" x-autocompletetype="given-name"/>
-				</div>
-				<div class="formitem col1of2">
-					<label class="label req" for="firstname">Nachname</label>
-					<input type="text" name="lastname" id="lastname" placeholder="Nachname" required="required" x-autocompletetype="family-name"/>
-				</div>
+				<label class="label req">Vor- und Nachname</label>
+				<label class="formitem col1of2">
+					<span class="label req">Vorname</span>
+					<input type="text" name="firstname" placeholder="Vorname" required="required" x-autocompletetype="given-name"/>
+				</label>
+				<label class="formitem col1of2">
+					<span class="label req">Nachname</span>
+					<input type="text" name="lastname" placeholder="Nachname" required="required" x-autocompletetype="family-name"/>
+				</label>
 			</div>
 			<div class="formrow">
-				<div class="formitem col1of3">
-					<label class="label" for="zip">PLZ</label>
+				<label class="formitem col1of3">
+					<span class="label">PLZ</span>
 					<input type="text" name="zip" id="zip" pattern="[0-9]{5}" x-autocompletetype="postal-code"/>
-				</div>
-				<div class="formitem col2of3">
-					<label class="label" for="city">Ort</label>
+				</label>
+				<label class="formitem col2of3">
+					<span class="label">Ort</span>
 					<input type="text" name="city" id="city" x-autocompletetype="city"/>
-				</div>
+				</label>
 			</div>
 			<div class="formrow">
-				<div class="formitem col1of2">
-					<label class="label" for="email">E-Mail</label>
+				<label class="formitem col1of2">
+					<span class="label">E-Mail</span>
 					<input type="email" name="email" id="email" x-autocompletetype="email"/>
-				</div>
-				<div class="formitem col1of2">
-					<label class="label" for="phone">Telefon... Extra viel Text hier um superlange Labels zu testen. Kunden tun so etwas.</label>
+				</label>
+				<label class="formitem col1of2">
+					<span class="label">Telefon... Extra viel Text hier um superlange Labels zu testen. Kunden tun so etwas.</span>
 					<input type="tel" name="phone" id="phone" x-autocompletetype="tel"/>
-				</div>
+				</label>
 			</div>
 			<div class="formrow">
-				<div class="formitem col1of2">
-					<label class="label" for="website">Deine Website, Blog, dein Google-Plus-Profil, Twitter- oder Facebook-Profil, whatever. Extra viel Text hier um superlange Labels zu testen. Kunden tun so etwas.</label>
+				<label class="formitem col1of2">
+					<span class="label">Deine Website, Blog, dein Google-Plus-Profil, Twitter- oder Facebook-Profil, whatever. Extra viel Text hier um superlange Labels zu testen. Kunden tun so etwas.</span>
 					<input type="url" name="website" id="website" x-autocompletetype="url"/>
-				</div>
+				</label>
 				<div class="formitem col1of2">
 					<a href="javascript://" class="button">Link button</a>
 					<button type="button" class="button disabled" disabled="disabled">Disabled button</button>
 				</div>
 			</div>
 			<div class="formrow">
-				<div class="formitem col1of2">
-					<label class="label" for="password">Passwort</label>
+				<label class="formitem col1of2">
+					<span class="label">Passwort</span>
 					<input type="password" placeholder="Passwort" name="password" id="password"/>
-				</div>
-				<div class="formitem col1of2">
+				</label>
+				<label class="formitem col1of2">
 					<input type="password" placeholder="Passwort wiederholen" name="passwordagain" id="passwordagain"/>
-				</div>
+				</label>
 			</div>
 			<div class="formrow">
-				<div class="formitem">
-					<label class="label req" for="message">Narchricht</label>
+				<label class="formitem">
+					<span class="label req">Narchricht</span>
 					<textarea name="message" id="message" cols="40" rows="5" required="required"></textarea>
-				</div>
+				</label>
 			</div>
 			<div class="formrow">
 				<div class="formitem">
@@ -158,8 +158,8 @@
 				</div>
 			</div>
 			<div class="formrow">
-				<div class="formitem col1of2">
-					<label class="label" for="country">Land</label>
+				<label class="formitem col1of2">
+					<span class="label">Land</span>
 					<select name="country" id="country" x-autocompletetype="country-name">
 						<option selected="selected">bitte wählen</option>
 						<option>Deutschland</option>
@@ -167,7 +167,7 @@
 						<option>Italien</option>
 						<option>Spanien</option>
 					</select>
-				</div>
+				</label>
 			</div>
 			<div class="formrow">
 				<div class="formitem">
@@ -177,7 +177,7 @@
 							<span>Hiermit bestätige ich die <a href="javascript://">AGB</a> und erlaube euch alles, was ihr wollt. Hier ist schon mal eine Error-Klasse dran, um eine serverseitige Validierung zu simulieren. Und der Text ist länger, um das Umbruch-Verhalten zu testen.</span>
 						</label>
 					</div>
-					<label for="terms" class="error">Bitte bestätige die AGB.</label>
+					<label class="error">Bitte bestätige die AGB.</label>
 				</div>
 			</div>
 		</fieldset>

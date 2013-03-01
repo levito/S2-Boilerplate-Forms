@@ -1,3 +1,14 @@
+// loosely based on jqueryUI uniqueId()
+(function($, undefined) {
+	var uuid = 0;
+	$.fn.uuid = function() {
+		return this.each(function() {
+			this.id = this.id || ["uuid", (++uuid)].join("");
+		});
+	};
+})(jQuery);
+
+
 // http://lea.verou.me/2009/02/check-if-a-css-property-is-supported/
 // http://jsfiddle.net/leaverou/Pmn8m/
 // IE fixed and modified from selector to rule to allow for @media query check
@@ -25,7 +36,7 @@ if (!supportsCssRule(":checked{}")) {
 		} else if ($input.is(":checkbox")) {
 			$input.removeClass("checked");
 		}
-	}
+	};
 	$(document).on("click", ":radio, :checkbox", checkedPolyfill);
 	$(":radio, :checkbox").each(checkedPolyfill);
 }
@@ -102,9 +113,11 @@ if (!("placeholder" in document.createElement("input"))) {
 
 
 // create shared labels if not already given
-$(".formrow").each(function() {
+$(".wideform").find(".formrow").each(function() {
 	var $formrow = $(this);
-	if (!$formrow.children(".label").length) {
+	var $rowlabel = $formrow.children(".label");
+	var uuid = $formrow.find(":input:first").uuid()[0].id;
+	if (!$rowlabel.length) {
 		var required = false;
 		var labels = $.map($formrow.find(".label"), function(el) {
 			if (el.className.indexOf("req") > -1)
@@ -113,9 +126,12 @@ $(".formrow").each(function() {
 		}).join(", ");
 		$formrow.prepend(
 			$("<label class='label" + (required ? ' req' : '') + "'/>")
-			.attr("for", $formrow.find(".label:first").attr("for"))
+			.attr("for", uuid)
 			.html(labels)
 		);
+	} else {
+		if ($rowlabel.is("label"))
+			$rowlabel.attr("for", uuid);
 	}
 });
 
