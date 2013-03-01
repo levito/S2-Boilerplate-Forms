@@ -1,5 +1,20 @@
-if ($.browser.msie && $.browser.version < 9) {
-	// CSS :checked simulation
+// http://lea.verou.me/2009/02/check-if-a-css-property-is-supported/
+// http://jsfiddle.net/leaverou/Pmn8m/
+// IE fixed and modified from selector to rule to allow for @media query check
+function supportsCssRule(rule) {
+	var el = document.createElement("div");
+	el.innerHTML = ["&shy;", "<style type='text/css'>", rule, "</style>"].join("");
+	el = document.body.appendChild(el);
+	var style = el.getElementsByTagName("style")[0],
+		ret = !!((style.sheet && style.sheet.cssRules) || style.styleSheet.rules)[0];
+	document.body.removeChild(el);
+	el = null;
+	return ret;
+}
+
+
+// :checked polyfill
+if (!supportsCssRule(":checked{}")) {
 	var checkedPolyfill = function() {
 		var $input = $(this);
 		if ($input.is(":checked")) {
@@ -16,9 +31,24 @@ if ($.browser.msie && $.browser.version < 9) {
 }
 
 
-/**
- * Placeholder polyfill
- */
+// @media query simulation
+if (!supportsCssRule("@media min-width:1px{a{}}")) {
+	var oldBodyClass = document.body.className;
+	var checkWindowWidth = function() {
+		if (document.body.clientWidth > 800) {
+			document.body.className = oldBodyClass + " gt480 gt800";
+		} else if (document.body.clientWidth > 480) {
+			document.body.className = oldBodyClass + " gt480";
+		} else {
+			document.body.className = oldBodyClass;
+		}
+	};
+	checkWindowWidth();
+	$(window).resize(checkWindowWidth);
+}
+
+
+// Placeholder polyfill
 if (!("placeholder" in document.createElement("input"))) {
 	$("input[placeholder], textarea[placeholder]").each(function() {
 		var $input = $(this);
@@ -26,7 +56,7 @@ if (!("placeholder" in document.createElement("input"))) {
 		$input.removeAttr("placeholder");
 
 		var $clone = $input.clone();
-		if ($.browser.msie && $clone.attr("type") == "password") {
+		if ($clone.attr("type") == "password") {
 			$clone = $("<input type='text'/>");
 			$clone.attr("class", $input.attr("class"));
 			$clone.attr("size", $input.attr("size"));
@@ -71,9 +101,26 @@ if (!("placeholder" in document.createElement("input"))) {
 }
 
 
-/**
- * jQuery Validate
- */
+// create shared labels if not already given
+$(".formrow").each(function() {
+	var $formrow = $(this);
+	if (!$formrow.children(".label").length) {
+		var required = false;
+		var labels = $.map($formrow.find(".label"), function(el) {
+			if (el.className.indexOf("req") > -1)
+				required = true;
+			return el.innerHTML;
+		}).join(", ");
+		$formrow.prepend(
+			$("<label class='label" + (required ? ' req' : '') + "'/>")
+			.attr("for", $formrow.find(".label:first").attr("for"))
+			.html(labels)
+		);
+	}
+});
+
+
+// jQuery Validate
 $.validator.addMethod("pattern", function(value, element, param) {
 	if (this.optional(element)) {
 		return true;
@@ -98,4 +145,12 @@ $("form").validate({
 			pattern: "Bitte geben Sie eine gültige Postleitzahl an."
 		}
 	}
+});
+
+
+
+
+// Toggle label position - for demonstration
+$(".js_toggleLabelPosition").click(function() {
+	$("fieldset").toggleClass("wideform");
 });

@@ -2,17 +2,11 @@
 <html>
 <head>
 	<meta charset="UTF-8"/>
-	<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
 	<title>Forms</title>
-    <!--[if !IE | IE 9]><!-->
-		<link rel="stylesheet" type="text/less" href="/forms/extensions/forms.less"/>
-		<script type="text/javascript" src="/forms/extensions/less-1.3.1.min.js"></script>
-		<script>less.watch()</script>
-	<!-- <![endif]-->
-	<!--[if IE 8]>
-		<link rel="stylesheet" type="text/css" href="/forms/extensions/forms.css"/>
-		<script type="text/javascript" src="/forms/extensions/respond.min.js"></script>
-	<![endif]-->
+	<link rel="stylesheet" type="text/less" href="/forms/extensions/forms.less"/>
+	<script type="text/javascript" src="/forms/extensions/less-1.3.3.min.js"></script>
+	<script>//less.watch()</script>
 </head>
 <body>
 	<h1><span>Best Practice</span> Forms</h1>
@@ -20,92 +14,110 @@
 	<ul>
 		<li>Breite Unabhängig vom Container (prozentuale Feldbreiten, keine festen Pixel)</li>
 		<li>Responsive, linearisierbar, mobile-ready</li>
+		<li>Browser-Support ab IE8 aufwärts</li>
 		<li>2 Varianten: Labels links und Labels oben</li>
 		<li>Robust gegenüber mehrzeiligen Labels</li>
 		<li>Clientseitige Validierung mit HTML5 und JavaScript-Unterstützung</li>
 		<li>Inline-Fehlermeldungen</li>
-		<li>Browser-Support ab IE8 aufwärts</li>
+		<li>Backend-/Templating-freundlich
+			<ul>
+				<li>Auslagerbare Label/Input/Errortext-Snippets</li>
+				<li>Schlankes, verständliches und flexibles Markup</li>
+			</ul>
+		</li>
 	</ul>
 	<form action="/forms" method="get">
-		<fieldset class="labelsleft">
-			<h3 class="legend">Beispiel: Labels links</h3>
-			<p>Empfehlenswert für die meisten Formulare und Prozesse</p>
+		<fieldset class="wideform">
+			<h3 class="legend">Labels links oder oben</h3>
+			<p><b>Links:</b> Empfehlenswert für die meisten Formulare und Prozesse<br/>
+				<b>Oben:</b> Besser geeignet für sehr kurze oder schmale Formulare</p>
+			<a href="javascript://" class="primary button js_toggleLabelPosition">Position umschalten</a>
+
+			<hr/>
+
 			<div class="formrow">
-				<div class="label">Anrede<span class="req">*</span></div>
-				<div class="formitem ticks">
-					<label>
-						<input type="radio" name="salutation" value="Frau" required="required"/>
-						<span>Frau</span>
-					</label>
-					<label>
-						<input type="radio" name="salutation" value="Herr" required="required"/>
-						<span>Herr</span>
-					</label>
-					<label>
-						<input type="radio" name="salutation" value="Fraeulein" required="required"/>
-						<span>Fräulein</span>
-					</label>
-					<label>
-						<input type="radio" name="salutation" value="Herrchen" required="required"/>
-						<span>Herrchen</span>
-					</label>
-					<label>
-						<input type="radio" name="salutation" value="Kanzler" required="required"/>
-						<span>Kanzler</span>
-					</label>
-					<label>
-						<input type="radio" name="salutation" value="Kaiser" required="required"/>
-						<span>Kaiser</span>
-					</label>
-					<label>
-						<input type="radio" name="salutation" value="Koenig" required="required"/>
-						<span>König</span>
-					</label>
-					<label>
-						<input type="radio" name="salutation" value="Koenigin" required="required"/>
-						<span>Königin</span>
-					</label>
+				<div class="formitem">
+					<div class="label req">Anrede</div>
+					<div class="ticks">
+						<label>
+							<input type="radio" name="salutation" value="Frau" required="required"/>
+							<span>Frau</span>
+						</label>
+						<label>
+							<input type="radio" name="salutation" value="Herr" required="required"/>
+							<span>Herr</span>
+						</label>
+						<label>
+							<input type="radio" name="salutation" value="Fraeulein" required="required"/>
+							<span>Fräulein</span>
+						</label>
+						<label>
+							<input type="radio" name="salutation" value="Herrchen" required="required"/>
+							<span>Herrchen</span>
+						</label>
+						<label>
+							<input type="radio" name="salutation" value="Kanzler" required="required"/>
+							<span>Kanzler</span>
+						</label>
+						<label>
+							<input type="radio" name="salutation" value="Kaiser" required="required"/>
+							<span>Kaiser</span>
+						</label>
+						<label>
+							<input type="radio" name="salutation" value="Koenig" required="required"/>
+							<span>König</span>
+						</label>
+						<label>
+							<input type="radio" name="salutation" value="Koenigin" required="required"/>
+							<span>Königin</span>
+						</label>
+					</div>
 				</div>
 			</div>
 			<div class="formrow">
-				<label for="firstname">Name<span class="req">*</span></label>
+				<label class="label req" for="firstname">Vor- und Nachname</label>
 				<div class="formitem col1of2">
+					<label class="label req" for="firstname">Vorname</label>
 					<input type="text" name="firstname" id="firstname" placeholder="Vorname" required="required" x-autocompletetype="given-name"/>
 				</div>
 				<div class="formitem col1of2">
+					<label class="label req" for="firstname">Nachname</label>
 					<input type="text" name="lastname" id="lastname" placeholder="Nachname" required="required" x-autocompletetype="family-name"/>
 				</div>
 			</div>
 			<div class="formrow">
-				<label for="zip">PLZ, Ort</label>
 				<div class="formitem col1of3">
-					<input type="text" name="zip" id="zip" pattern="\d*" x-autocompletetype="postal-code"/>
+					<label class="label" for="zip">PLZ</label>
+					<input type="text" name="zip" id="zip" pattern="[0-9]{5}" x-autocompletetype="postal-code"/>
 				</div>
 				<div class="formitem col2of3">
+					<label class="label" for="city">Ort</label>
 					<input type="text" name="city" id="city" x-autocompletetype="city"/>
 				</div>
 			</div>
 			<div class="formrow">
-				<label for="email">E-Mail und Telefon</label>
 				<div class="formitem col1of2">
+					<label class="label" for="email">E-Mail</label>
 					<input type="email" name="email" id="email" x-autocompletetype="email"/>
 				</div>
 				<div class="formitem col1of2">
+					<label class="label" for="phone">Telefon... Extra viel Text hier um superlange Labels zu testen. Kunden tun so etwas.</label>
 					<input type="tel" name="phone" id="phone" x-autocompletetype="tel"/>
 				</div>
 			</div>
 			<div class="formrow">
-				<label for="website">Ihre Website, Blog, Ihr Google-Plus-Profil, Twitter- oder Facebook-Profil, whatever. Extra viel Text hier um superlange Labels zu testen. Kunden tun so etwas.</label>
 				<div class="formitem col1of2">
+					<label class="label" for="website">Deine Website, Blog, dein Google-Plus-Profil, Twitter- oder Facebook-Profil, whatever. Extra viel Text hier um superlange Labels zu testen. Kunden tun so etwas.</label>
 					<input type="url" name="website" id="website" x-autocompletetype="url"/>
 				</div>
 				<div class="formitem col1of2">
-					<button type="button" class="button disabled" disabled="disabled">Inline button, disabled</button>
+					<a href="javascript://" class="button">Link button</a>
+					<button type="button" class="button disabled" disabled="disabled">Disabled button</button>
 				</div>
 			</div>
 			<div class="formrow">
-				<label for="password">Passwort</label>
 				<div class="formitem col1of2">
+					<label class="label" for="password">Passwort</label>
 					<input type="password" placeholder="Passwort" name="password" id="password"/>
 				</div>
 				<div class="formitem col1of2">
@@ -113,14 +125,14 @@
 				</div>
 			</div>
 			<div class="formrow">
-				<label for="message">Narchricht<span class="req">*</span></label>
 				<div class="formitem">
+					<label class="label req" for="message">Narchricht</label>
 					<textarea name="message" id="message" cols="40" rows="5" required="required"></textarea>
 				</div>
 			</div>
 			<div class="formrow">
-				<div class="label">Ihre Bewertung<span class="req">*</span></div>
 				<div class="formitem">
+					<div class="label req">Deine Bewertung</div>
 					<div class="rating">
 						<input type="radio" name="rating" value="5" id="rating5" required="required"/>
 						<label for="rating5" class="star">
@@ -146,8 +158,8 @@
 				</div>
 			</div>
 			<div class="formrow">
-				<label for="country">Land</label>
 				<div class="formitem col1of2">
+					<label class="label" for="country">Land</label>
 					<select name="country" id="country" x-autocompletetype="country-name">
 						<option selected="selected">bitte wählen</option>
 						<option>Deutschland</option>
@@ -158,132 +170,32 @@
 				</div>
 			</div>
 			<div class="formrow">
-				<div class="formitem ticks">
-					<label>
-						<input type="checkbox" name="terms" class="error" required="required"/>
-						<span>Hiermit bestätige ich die <a href="javascript://">AGB</a> und erlaube Ihnen alles, was Sie wollen. Hier ist schon mal eine Error-Klasse dran, um eine serverseitige Validierung zu simulieren. Und der Text ist länger, um das Umbruch-Verhalten zu testen.</span>
-					</label>
-					<label for="terms" class="error">Bitte bestätigen Sie die AGB.</label>
-				</div>
-			</div>
-		</fieldset>
-
-		<fieldset class="labelstop">
-			<h3 class="legend">Beispiel: Labels oben</h3>
-			<p>Empfehlenswert für sehr kurze oder schmale Formulare</p>
-			<div class="formrow">
-				<div class="formitem">
-					<div class="label">Anrede<span class="req">*</span></div>
-					<div class="ticks">
-						<label>
-							<input type="radio" name="salutation2" value="Frau" required="required"/>
-							<span>Frau</span>
-						</label>
-						<label>
-							<input type="radio" name="salutation2" value="Herr" required="required"/>
-							<span>Herr</span>
-						</label>
-						<label>
-							<input type="radio" name="salutation2" value="Fraeulein" required="required"/>
-							<span>Fräulein</span>
-						</label>
-						<label>
-							<input type="radio" name="salutation2" value="Herrchen" required="required"/>
-							<span>Herrchen</span>
-						</label>
-						<label>
-							<input type="radio" name="salutation2" value="Kanzler" required="required"/>
-							<span>Kanzler</span>
-						</label>
-						<label>
-							<input type="radio" name="salutation2" value="Kaiser" required="required"/>
-							<span>Kaiser</span>
-						</label>
-						<label>
-							<input type="radio" name="salutation2" value="Koenig" required="required"/>
-							<span>König</span>
-						</label>
-						<label>
-							<input type="radio" name="salutation2" value="Koenigin" required="required"/>
-							<span>Königin</span>
-						</label>
-					</div>
-				</div>
-			</div>
-			<div class="formrow">
-				<div class="formitem col1of2">
-					<label for="firstname2">Vorname<span class="req">*</span></label>
-					<input type="text" name="firstname2" id="firstname2" placeholder="Vorname" required="required" x-autocompletetype="given-name"/>
-				</div>
-				<div class="formitem col1of2">
-					<label for="lastname2">Nachname<span class="req">*</span></label>
-					<input type="text" name="lastname2" id="lastname2" placeholder="Nachname" required="required" x-autocompletetype="family-name"/>
-				</div>
-			</div>
-			<div class="formrow">
-				<div class="formitem col1of3">
-					<label for="zip2">PLZ</label>
-					<input type="text" name="zip2" id="zip2" pattern="\d*" x-autocompletetype="postal-code"/>
-				</div>
-				<div class="formitem col2of3">
-					<label for="city2">Ort</label>
-					<input type="text" name="city2" id="city2" x-autocompletetype="city"/>
-				</div>
-			</div>
-			<div class="formrow">
-				<div class="formitem">
-					<label for="message2">Narchricht<span class="req">*</span></label>
-					<textarea name="message2" id="message2" cols="40" rows="5" required="required"></textarea>
-				</div>
-			</div>
-			<div class="formrow">
-				<div class="formitem">
-					<div class="label">Ihre Bewertung<span class="req">*</span></div>
-					<div class="rating">
-						<input type="radio" name="rating2" value="5" id="rating5b" required="required"/>
-						<label for="rating5b" class="star">
-							<span>5 Sterne</span>
-						</label>
-						<input type="radio" name="rating2" value="4" id="rating4b" required="required"/>
-						<label for="rating4b" class="star">
-							<span>4 Sterne</span>
-						</label>
-						<input type="radio" name="rating2" value="3" id="rating3b" required="required"/><!-- checked="checked" -->
-						<label for="rating3b" class="star">
-							<span>3 Sterne</span>
-						</label>
-						<input type="radio" name="rating2" value="2" id="rating2b" required="required"/>
-						<label for="rating2b" class="star">
-							<span>2 Sterne</span>
-						</label>
-						<input type="radio" name="rating2" value="1" id="rating1b" required="required"/>
-						<label for="rating1b" class="star">
-							<span>1 Stern</span>
-						</label>
-					</div>
-				</div>
-			</div>
-			<div class="formrow">
 				<div class="formitem">
 					<div class="ticks">
 						<label>
-							<input type="checkbox" name="terms2" class="error" required="required"/>
-							<span>Hiermit bestätige ich die <a href="javascript://">AGB</a> und erlaube Ihnen alles, was Sie wollen. Hier ist schon mal eine Error-Klasse dran, um eine serverseitige Validierung zu simulieren. Und der Text ist länger, um das Umbruch-Verhalten zu testen.</span>
+							<input type="checkbox" name="terms" class="error" required="required"/>
+							<span>Hiermit bestätige ich die <a href="javascript://">AGB</a> und erlaube euch alles, was ihr wollt. Hier ist schon mal eine Error-Klasse dran, um eine serverseitige Validierung zu simulieren. Und der Text ist länger, um das Umbruch-Verhalten zu testen.</span>
 						</label>
 					</div>
-					<label for="terms2" class="error">Bitte bestätigen Sie die AGB.</label>
+					<label for="terms" class="error">Bitte bestätige die AGB.</label>
 				</div>
 			</div>
 		</fieldset>
 
 		<div class="buttons">
-			<a href="javascript://" class="button">Link button</a>
-			<button class="button">Submit</button>
+			<div class="forth">
+				<a href="javascript://" class="button">Reset</a>
+				<button class="primary button">Submit</button>
+			</div>
+			<div class="back">
+				<button class="button" name="back">Back</button>
+				<a href="javascript://">Print</a>
+			</div>
 		</div>
 	</form>
 
-	<script type="text/javascript" src="/forms/extensions/jquery-1.8.2.min.js"></script>
-	<script type="text/javascript" src="/forms/extensions/jquery.validate.js"></script>
+	<script type="text/javascript" src="/forms/extensions/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="/forms/extensions/jquery.validate.min.js"></script>
 	<script type="text/javascript" src="/forms/extensions/jquery.validate.messages_de.js"></script>
 	<script type="text/javascript" src="/forms/extensions/forms.js"></script>
 </body>
