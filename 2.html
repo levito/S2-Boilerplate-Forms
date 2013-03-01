@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+	<title>Forms</title>
+	<link rel="stylesheet" type="text/less" href="/forms/extensions/forms.less"/>
+	<script type="text/javascript" src="/forms/extensions/less-1.3.3.min.js"></script>
+	<script>//less.watch()</script>
+</head>
+<body>
+	<h1><span>Best Practice</span> Forms</h1>
+	<form action="/forms" method="get">
+		<fieldset class="wideform">
+			<h2 class="legend">Radio Stars, mehrspaltig und responsive</h2>
+			<a href="javascript://" class="primary button js_toggleLabelPosition">Label-Position umschalten</a>
+
+			<hr/>
+
+			<div class="formrow">
+				<div class="formitem">
+					<div class="label req">Anrede</div>
+					<div class="ticks">
+						<label>
+							<input type="radio" name="salutation" value="Frau" required="required"/>
+							<span>Frau</span>
+						</label>
+						<label>
+							<input type="radio" name="salutation" value="Herr" required="required"/>
+							<span>Herr</span>
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="formrow">
+				<label class="label req" for="firstname">Vor- und Nachname</label>
+				<div class="formitem col1of2">
+					<label class="label req" for="firstname">Vorname (alternatives Label!)</label>
+					<input type="text" name="firstname" id="firstname" required="required" x-autocompletetype="given-name"/>
+				</div>
+				<div class="formitem col1of2">
+					<label class="label req" for="firstname">Nachname</label>
+					<input type="text" name="lastname" id="lastname" required="required" x-autocompletetype="family-name"/>
+				</div>
+			</div>
+			<div class="formrow">
+				<div class="formitem col2of3">
+					<label class="label" for="email">E-Mail (2/3 Breite)</label>
+					<input type="email" name="email" id="email" x-autocompletetype="email"/>
+				</div>
+			</div>
+			<div class="formrow">
+				<div class="formitem">
+					<label class="label req" for="message">Narchricht</label>
+					<textarea name="message" id="message" cols="40" rows="5" required="required"></textarea>
+				</div>
+			</div>
+			<div class="formrow">
+				<div class="formitem">
+					<div class="label req">Deine Bewertung</div>
+					<div class="rating">
+						<input type="radio" name="rating" value="5" id="rating5" required="required"/>
+						<label for="rating5" class="star">
+							<span>5 Sterne</span>
+						</label>
+						<input type="radio" name="rating" value="4" id="rating4" required="required"/>
+						<label for="rating4" class="star">
+							<span>4 Sterne</span>
+						</label>
+						<input type="radio" name="rating" value="3" id="rating3" required="required"/>
+						<label for="rating3" class="star">
+							<span>3 Sterne</span>
+						</label>
+						<input type="radio" name="rating" value="2" id="rating2" required="required"/>
+						<label for="rating2" class="star">
+							<span>2 Sterne</span>
+						</label>
+						<input type="radio" name="rating" value="1" id="rating1" required="required"/>
+						<label for="rating1" class="star">
+							<span>1 Stern</span>
+						</label>
+					</div>
+				</div>
+			</div>
+		</fieldset>
+
+		<div class="buttons">
+			<div class="forth">
+				<a href="3.html" class="primary button">Weiter</a>
+			</div>
+			<div class="back">
+				<a href="1.html" class="button">Zurück</a>
+			</div>
+		</div>
+	</form>
+
+	<script type="text/javascript" src="/forms/extensions/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="/forms/extensions/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="/forms/extensions/jquery.validate.messages_de.js"></script>
+	<script type="text/javascript" src="/forms/extensions/forms.js"></script>
+</body>
+</html>

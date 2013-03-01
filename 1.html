@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+	<title>Forms</title>
+	<link rel="stylesheet" type="text/less" href="/forms/extensions/forms.less"/>
+	<script type="text/javascript" src="/forms/extensions/less-1.3.3.min.js"></script>
+	<script>//less.watch()</script>
+</head>
+<body>
+	<h1><span>Best Practice</span> Forms</h1>
+	<form action="/forms" method="get">
+		<fieldset class="wideform">
+			<h2 class="legend">As simple as it gets</h2>
+
+			<div class="formrow">
+				<label class="label req" for="name">Name</label>
+				<div class="formitem">
+					<input type="text" name="name" id="name" required="required" x-autocompletetype="given-name"/>
+				</div>
+			</div>
+			<div class="formrow">
+				<label class="label" for="email">E-Mail</label>
+				<div class="formitem">
+					<input type="email" name="email" id="email" x-autocompletetype="email"/>
+				</div>
+			</div>
+			<div class="formrow">
+				<label class="label req" for="message">Narchricht</label>
+				<div class="formitem">
+					<textarea name="message" id="message" cols="40" rows="5" required="required"></textarea>
+				</div>
+			</div>
+		</fieldset>
+
+		<div class="buttons">
+			<a href="2.html" class="primary button">Weiter</a>
+		</div>
+	</form>
+
+	<script type="text/javascript" src="/forms/extensions/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="/forms/extensions/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="/forms/extensions/jquery.validate.messages_de.js"></script>
+	<script type="text/javascript" src="/forms/extensions/forms.js"></script>
+</body>
+</html>

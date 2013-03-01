@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+	<title>Forms</title>
+	<link rel="stylesheet" type="text/less" href="/forms/extensions/forms.less"/>
+	<script type="text/javascript" src="/forms/extensions/less-1.3.3.min.js"></script>
+	<script>//less.watch()</script>
+</head>
+<body>
+	<h1><span>Best Practice</span> Forms</h1>
+	<form action="/forms" method="get">
+		<fieldset class="wideform">
+			<h2 class="legend">Vertikale Ausrichtung, erweiterte Validierung</h2>
+			<p>
+				Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Button im Text:
+				<a href="javascript://" class="primary button js_toggleLabelPosition">Label-Position umschalten</a>
+				und noch ein
+				<input type="text" value="Input im Text"/>  Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
+			</p>
+
+			<hr/>
+
+			<div class="formrow">
+				<div class="formitem">
+					<div class="label req">Anrede</div>
+					<div class="ticks">
+						<label>
+							<input type="radio" name="salutation" value="Frau" required="required"/>
+							<span>Frau</span>
+						</label>
+						<label>
+							<input type="radio" name="salutation" value="Herr" required="required"/>
+							<span>Herr</span>
+						</label>
+						<label>
+							<input type="radio" name="salutation" value="Fraeulein" required="required"/>
+							<span>Fräulein</span>
+						</label>
+						<label>
+							<input type="radio" name="salutation" value="Herrchen" required="required"/>
+							<span>Herrchen</span>
+						</label>
+						<label>
+							<input type="radio" name="salutation" value="Kanzler" required="required"/>
+							<span>Kanzler</span>
+						</label>
+						<label>
+							<input type="radio" name="salutation" value="Kaiser" required="required"/>
+							<span>Kaiser</span>
+						</label>
+						<label>
+							<input type="radio" name="salutation" value="Koenig" required="required"/>
+							<span>König</span>
+						</label>
+						<label>
+							<input type="radio" name="salutation" value="Koenigin" required="required"/>
+							<span>Königin</span>
+						</label>
+						<label>
+							<input type="radio" name="salutation" value="Dame" required="required"/>
+							<span>Dame</span>
+						</label>
+						<label>
+							<input type="radio" name="salutation" value="Bube" required="required"/>
+							<span>Bube</span>
+						</label>
+						<label>
+							<input type="radio" name="salutation" value="Meister" required="required"/>
+							<span>Meister</span>
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="formrow">
+				<label class="label req" for="firstname">Vor- und Nachname</label>
+				<div class="formitem col1of2">
+					<label class="label req" for="firstname">Vorname</label>
+					<input type="text" name="firstname" id="firstname" required="required" x-autocompletetype="given-name"/>
+				</div>
+				<div class="formitem col1of2">
+					<label class="label req" for="firstname">Nachname</label>
+					<input type="text" name="lastname" id="lastname" required="required" x-autocompletetype="family-name"/>
+				</div>
+			</div>
+			<div class="formrow">
+				<div class="formitem col1of2">
+					<label class="label" for="website">Denk dir einen richtig coolen Usernamen aus, auf den kein Anderer kommt. Ob wirklich kein Anderer darauf gekommen ist, siehst, wenn du auf den Button "Prüfen" klickst.</label>
+					<input type="url" name="website" id="website" x-autocompletetype="url"/>
+				</div>
+				<div class="formitem col1of2">
+					<a href="javascript://" class="button">Prüfen</a>
+					<button type="button" class="button disabled" disabled="disabled">Disabled</button>
+				</div>
+			</div>
+			<div class="formrow">
+				<div class="formitem col1of2">
+					<label class="label" for="email">E-Mail</label>
+					<input type="email" name="email" id="email" x-autocompletetype="email"/>
+				</div>
+				<div class="formitem col1of2">
+					<label class="label" for="website">Ihre Website, Blog, Ihr Google-Plus-Profil, Twitter- oder Facebook-Profil, whatever. Extra viel Text hier um superlange Labels zu testen. Kunden tun so etwas.</label>
+					<input type="url" name="website" id="website" x-autocompletetype="url"/>
+				</div>
+			</div>
+			<div class="formrow">
+				<div class="formitem col1of5">
+					<label class="label" for="zip">PLZ</label>
+					<input type="text" placeholder="[0-9]{5}" name="zip" id="zip" pattern="[0-9]{5}" x-autocompletetype="postal-code"/>
+				</div>
+				<div class="formitem col2of5">
+					<label class="label" for="city">Ort</label>
+					<input type="text" placeholder="Placeholder + Polyfill" name="city" id="city" x-autocompletetype="city"/>
+				</div>
+				<div class="formitem col2of5">
+					<label class="label" for="country">Land</label>
+					<select name="country" id="country" x-autocompletetype="country-name">
+						<option selected="selected">bitte wählen</option>
+						<option>Deutschland</option>
+						<option>Frankreich</option>
+						<option>Italien</option>
+						<option>Spanien</option>
+					</select>
+				</div>
+			</div>
+			<div class="formrow">
+				<div class="formitem col1of2">
+					<label class="label" for="password">Passwort</label>
+					<input type="password" placeholder="Passwort (custom validation)" name="password" id="password"/>
+				</div>
+				<div class="formitem col1of2">
+					<input type="password" placeholder="Nochmal (ohne Label)" name="passwordagain" id="passwordagain"/>
+				</div>
+			</div>
+			<div class="formrow">
+				<div class="formitem">
+					<label class="label req" for="message">Narchricht</label>
+					<textarea name="message" id="message" cols="40" rows="5" required="required"></textarea>
+				</div>
+			</div>
+			<div class="formrow">
+				<div class="formitem">
+					<div class="label req">Ihre Bewertung</div>
+					<div class="rating">
+						<input type="radio" name="rating" value="5" id="rating5" required="required"/>
+						<label for="rating5" class="star">
+							<span>5 Sterne</span>
+						</label>
+						<input type="radio" name="rating" value="4" id="rating4" required="required"/>
+						<label for="rating4" class="star">
+							<span>4 Sterne</span>
+						</label>
+						<input type="radio" name="rating" value="3" id="rating3" required="required"/>
+						<label for="rating3" class="star">
+							<span>3 Sterne</span>
+						</label>
+						<input type="radio" name="rating" value="2" id="rating2" required="required"/>
+						<label for="rating2" class="star">
+							<span>2 Sterne</span>
+						</label>
+						<input type="radio" name="rating" value="1" id="rating1" required="required"/>
+						<label for="rating1" class="star">
+							<span>1 Stern</span>
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="formrow">
+				<div class="formitem">
+					<div class="ticks">
+						<label>
+							<input type="checkbox" name="terms" class="error" required="required"/>
+							<span>Hiermit bestätige ich die <a href="javascript://">AGB</a> und erlaube euch alles, was ihr wollt. Hier ist schon mal eine Error-Klasse dran, um eine serverseitige Validierung zu simulieren. Und der Text ist länger, um das Umbruch-Verhalten zu testen.</span>
+						</label>
+					</div>
+					<label for="terms" class="error">Bitte bestätige die AGB.</label>
+				</div>
+			</div>
+		</fieldset>
+
+		<div class="buttons">
+			<div class="forth">
+				<input type="reset" value="Reset (input)" class="button"/>
+				<button type="submit" class="primary button">Senden (button)</button>
+			</div>
+			<div class="back">
+				<a href="2.html" class="button">Zurück (a)</a>
+				<a href="javascript:print()"/>Drucken (vertical-align passt)</a>
+			</div>
+		</div>
+	</form>
+
+	<script type="text/javascript" src="/forms/extensions/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="/forms/extensions/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="/forms/extensions/jquery.validate.messages_de.js"></script>
+	<script type="text/javascript" src="/forms/extensions/forms.js"></script>
+</body>
+</html>
