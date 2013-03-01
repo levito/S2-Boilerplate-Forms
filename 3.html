@@ -74,70 +74,70 @@
 				</div>
 			</div>
 			<div class="formrow">
-				<label class="label req" for="firstname">Vor- und Nachname</label>
-				<div class="formitem col1of2">
-					<label class="label req" for="firstname">Vorname</label>
-					<input type="text" name="firstname" id="firstname" required="required" x-autocompletetype="given-name"/>
-				</div>
-				<div class="formitem col1of2">
-					<label class="label req" for="firstname">Nachname</label>
-					<input type="text" name="lastname" id="lastname" required="required" x-autocompletetype="family-name"/>
-				</div>
+				<label class="label req">Vor- und Nachname</label>
+				<label class="formitem col1of2">
+					<span class="label req">Vorname</span>
+					<input type="text" name="firstname" required="required" x-autocompletetype="given-name"/>
+				</label>
+				<label class="formitem col1of2">
+					<span class="label req">Nachname</span>
+					<input type="text" name="lastname" required="required" x-autocompletetype="family-name"/>
+				</label>
 			</div>
 			<div class="formrow">
-				<div class="formitem col1of2">
-					<label class="label" for="website">Denk dir einen richtig coolen Usernamen aus, auf den kein Anderer kommt. Ob wirklich kein Anderer darauf gekommen ist, siehst, wenn du auf den Button "Prüfen" klickst.</label>
-					<input type="url" name="website" id="website" x-autocompletetype="url"/>
-				</div>
+				<label class="formitem col1of2">
+					<span class="label">Denk dir einen richtig coolen Usernamen aus, auf den kein Anderer kommt. Ob wirklich kein Anderer darauf gekommen ist, siehst, wenn du auf den Button "Prüfen" klickst.</span>
+					<input type="url" name="website" x-autocompletetype="url"/>
+				</label>
 				<div class="formitem col1of2">
 					<a href="javascript://" class="button">Prüfen</a>
 					<button type="button" class="button disabled" disabled="disabled">Disabled</button>
 				</div>
 			</div>
 			<div class="formrow">
-				<div class="formitem col1of2">
-					<label class="label" for="email">E-Mail</label>
-					<input type="email" name="email" id="email" x-autocompletetype="email"/>
-				</div>
-				<div class="formitem col1of2">
-					<label class="label" for="website">Ihre Website, Blog, Ihr Google-Plus-Profil, Twitter- oder Facebook-Profil, whatever. Extra viel Text hier um superlange Labels zu testen. Kunden tun so etwas.</label>
-					<input type="url" name="website" id="website" x-autocompletetype="url"/>
-				</div>
+				<label class="formitem col1of2">
+					<span class="label">E-Mail</span>
+					<input type="email" name="email" x-autocompletetype="email"/>
+				</label>
+				<label class="formitem col1of2">
+					<span class="label">Ihre Website, Blog, Ihr Google-Plus-Profil, Twitter- oder Facebook-Profil, whatever. Extra viel Text hier um superlange Labels zu testen. Kunden tun so etwas.</span>
+					<input type="url" name="website" x-autocompletetype="url"/>
+				</label>
 			</div>
 			<div class="formrow">
-				<div class="formitem col1of5">
-					<label class="label" for="zip">PLZ</label>
-					<input type="text" placeholder="[0-9]{5}" name="zip" id="zip" pattern="[0-9]{5}" x-autocompletetype="postal-code"/>
-				</div>
-				<div class="formitem col2of5">
-					<label class="label" for="city">Ort</label>
-					<input type="text" placeholder="Placeholder + Polyfill" name="city" id="city" x-autocompletetype="city"/>
-				</div>
-				<div class="formitem col2of5">
-					<label class="label" for="country">Land</label>
-					<select name="country" id="country" x-autocompletetype="country-name">
+				<label class="formitem col1of5">
+					<span class="label">PLZ</span>
+					<input type="text" placeholder="[0-9]{5}" name="zip" pattern="[0-9]{5}" x-autocompletetype="postal-code"/>
+				</label>
+				<label class="formitem col2of5">
+					<span class="label">Ort</span>
+					<input type="text" placeholder="Placeholder + Polyfill" name="city" x-autocompletetype="city"/>
+				</label>
+				<label class="formitem col2of5">
+					<span class="label">Land</span>
+					<select name="country" x-autocompletetype="country-name">
 						<option selected="selected">bitte wählen</option>
 						<option>Deutschland</option>
 						<option>Frankreich</option>
 						<option>Italien</option>
 						<option>Spanien</option>
 					</select>
-				</div>
+				</label>
 			</div>
 			<div class="formrow">
-				<div class="formitem col1of2">
-					<label class="label" for="password">Passwort</label>
-					<input type="password" placeholder="Passwort (custom validation)" name="password" id="password"/>
-				</div>
-				<div class="formitem col1of2">
-					<input type="password" placeholder="Nochmal (ohne Label)" name="passwordagain" id="passwordagain"/>
-				</div>
+				<label class="formitem col1of2">
+					<span class="label">Passwort</span>
+					<input type="password" placeholder="Passwort (custom validation)" name="password"/>
+				</label>
+				<label class="formitem col1of2">
+					<input type="password" placeholder="Nochmal (ohne Label)" name="passwordagain"/>
+				</label>
 			</div>
 			<div class="formrow">
-				<div class="formitem">
-					<label class="label req" for="message">Narchricht</label>
-					<textarea name="message" id="message" cols="40" rows="5" required="required"></textarea>
-				</div>
+				<label class="formitem">
+					<span class="label req">Narchricht</span>
+					<textarea name="message"  cols="40" rows="5" required="required"></textarea>
+				</label>
 			</div>
 			<div class="formrow">
 				<div class="formitem">
@@ -174,7 +174,7 @@
 							<span>Hiermit bestätige ich die <a href="javascript://">AGB</a> und erlaube euch alles, was ihr wollt. Hier ist schon mal eine Error-Klasse dran, um eine serverseitige Validierung zu simulieren. Und der Text ist länger, um das Umbruch-Verhalten zu testen.</span>
 						</label>
 					</div>
-					<label for="terms" class="error">Bitte bestätige die AGB.</label>
+					<label class="error">Bitte bestätige die AGB.</label>
 				</div>
 			</div>
 		</fieldset>
