@@ -25,7 +25,7 @@ if (!supportsCssRule(":checked{}")) {
 		} else if ($input.is(":checkbox")) {
 			$input.removeClass("checked");
 		}
-	}
+	};
 	$(document).on("click", ":radio, :checkbox", checkedPolyfill);
 	$(":radio, :checkbox").each(checkedPolyfill);
 }

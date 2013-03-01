@@ -90,8 +90,11 @@
 					<input type="url" name="website" id="website" x-autocompletetype="url"/>
 				</div>
 				<div class="formitem col1of2">
-					<a href="javascript://" class="button">Prüfen</a>
-					<button type="button" class="button disabled" disabled="disabled">Disabled</button>
+					<div class="buttons">
+						<a href="javascript://" class="button">Prüfen</a>
+						<button type="button" class="button disabled" disabled="disabled">Disabled</button>
+						<a href="javascript">Link</a>
+					</div>
 				</div>
 			</div>
 			<div class="formrow">
@@ -101,7 +104,8 @@
 				</div>
 				<div class="formitem col1of2">
 					<label class="label" for="website">Ihre Website, Blog, Ihr Google-Plus-Profil, Twitter- oder Facebook-Profil, whatever. Extra viel Text hier um superlange Labels zu testen. Kunden tun so etwas.</label>
-					<input type="url" name="website" id="website" x-autocompletetype="url"/>
+					<!-- <input type="url" name="website" id="website" x-autocompletetype="url"/> -->
+					<textarea name="website" id="website" cols="40" rows="5" required="required"></textarea>
 				</div>
 			</div>
 			<div class="formrow">

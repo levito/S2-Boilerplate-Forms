@@ -191,21 +191,17 @@ fieldset {
 	}
 	.formitem {
 		display: inline-block;
-		vertical-align: baseline;
 		width: 100%;
 		padding: 0 0 15px;
 
 		// following rules will be needed in side-by-side layouts, won't hurt here
-		// float any child to avoid breaking baseline-alignment of .labels...
+		// float any child to avoid breaking top-alignment of inputs and .buttons...
 		> * {
+			clear: left;
 			float: left;
 		}
-		// ... except .label, of course
-		> .label {
-			float: none;
-			display: block;
-		}
 
+		// ... except inputs, .buttons, of course
 		input[type="text"],
 		input[type="password"],
 		input[type="number"],
@@ -219,11 +215,16 @@ fieldset {
 		input[type="datetime"],
 		input[type="datetime-local"],
 		select,
-		textarea {
+		textarea,
+		.ticks,
+		.buttons {
+			float: none;
+			display: inline-block;
+			vertical-align: top;
 			width: 100%;
+			margin-right: -9px; // so input doesn't push away the input in next .formcol
 		}
 		label.error {
-			clear: left;
 			font-size: 11px;
 			font-weight: bold;
 			color: @errorcolor;
@@ -247,7 +248,7 @@ fieldset {
 				input[type="checkbox"],
 				input[type="radio"] {
 					float: left;
-					margin: 1px -9px 0 0; // ensure label text doesn't start below input
+					margin: 1px -9px 0 0; // -9px to ensure label text doesn't start below input
 					&.error ~ span {
 						color: @errorcolor;
 					}
@@ -443,13 +444,14 @@ fieldset {
 		}
 	}
 	.buttons &,
-	.formitem & {
-		margin-right: @formgutterwidth;
+	.formrow .formitem & { // .formrow to increase specifity
+		margin-right: 6px;
+		vertical-align: baseline;
 	}
 }
 .buttons {
-	text-align: right;
-	margin-right: -@formgutterwidth;
+	// text-align: right;
+	margin-right: -6px;
 	.forth {
 		float: right;
 	}
