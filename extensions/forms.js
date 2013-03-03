@@ -47,9 +47,9 @@ if (!supportsCssRule("@media min-width:1px{a{}}")) {
 	var oldBodyClass = document.body.className;
 	var checkWindowWidth = function() {
 		if (document.body.clientWidth > 800) {
-			document.body.className = oldBodyClass + " gt480 gt800";
-		} else if (document.body.clientWidth > 480) {
-			document.body.className = oldBodyClass + " gt480";
+			document.body.className = oldBodyClass + " gt400 gt800";
+		} else if (document.body.clientWidth > 400) {
+			document.body.className = oldBodyClass + " gt400";
 		} else {
 			document.body.className = oldBodyClass;
 		}

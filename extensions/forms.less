@@ -147,6 +147,7 @@ textarea {
 	line-height: normal; // allows same height across browsers
 	outline: none;
 	box-shadow: inset 0 1px 1px rgba(0,0,0,.07);
+	border-radius: 0;
 	background: #fafafa;
 	&:hover {
 		border-color: #c0c0c0;
@@ -304,7 +305,7 @@ fieldset {
 }
 
 // respond! IE8 friendly - we just set body classes via JS (no respond.js)
-.gt480 {
+.gt400 {
 	body { padding: 40px; }
 	fieldset {
 		margin: 40px 0;
@@ -386,8 +387,8 @@ fieldset {
 		}
 	}
 }
-@media screen and (min-width:481px) {
-	.gt480;
+@media screen and (min-width:401px) {
+	.gt400;
 }
 @media screen and (min-width:801px) {
 	.gt800;
