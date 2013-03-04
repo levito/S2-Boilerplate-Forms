@@ -43,7 +43,7 @@ if (!supportsCssRule(":checked{}")) {
 
 
 // @media query simulation
-if (!supportsCssRule("@media min-width:1px{a{}}")) {
+if (!supportsCssRule("@media screen and min-width:1px{a{}}")) {
 	var oldBodyClass = document.body.className;
 	var checkWindowWidth = function() {
 		if (document.body.clientWidth > 800) {
