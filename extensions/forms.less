@@ -123,7 +123,8 @@ input::-moz-focus-inner {
 	font-style: italic;
 	opacity: 1;
 }
-::-moz-placeholder { .placeholder; }
+:-moz-placeholder { .placeholder; } // Firefox < 19
+::-moz-placeholder { .placeholder; } // Firefox 19+
 :-ms-input-placeholder { .placeholder; }
 ::-webkit-input-placeholder { .placeholder; }
 
