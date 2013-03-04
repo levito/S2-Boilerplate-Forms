@@ -231,6 +231,12 @@ fieldset {
 			font-weight: bold;
 			color: @errorcolor;
 		}
+		input,
+		select,
+		textarea { // no need to be too specific here - keep generated css small!
+			~ label.error { display: none; } // auto-hide error messages when typing
+			&.error ~ label.error { display: block; }
+		}
 		.ticks {
 			padding: 5px 0 0;
 			label {

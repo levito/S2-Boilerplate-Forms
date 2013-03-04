@@ -43,7 +43,7 @@ if (!supportsCssRule(":checked{}")) {
 
 
 // @media query simulation
-if (!supportsCssRule("@media screen and min-width:1px{a{}}")) {
+if (!supportsCssRule("@media only all{a{}}")) {
 	var oldBodyClass = document.body.className;
 	var checkWindowWidth = function() {
 		if (document.body.clientWidth > 800) {
@@ -73,11 +73,11 @@ if (!("placeholder" in document.createElement("input"))) {
 			$clone.attr("size", $input.attr("size"));
 		}
 		$clone.data("placeholder", $input.data("placeholder"));
+		$clone.addClass("ignore placeholder");
 		$clone.attr("readonly", "readonly");
 		$clone.val($input.data("placeholder"));
 		$clone.removeAttr("name");
 		$input.removeAttr("id");
-		$clone.addClass("ignore placeholder");
 		if (!!$clone.attr("type") && $clone.attr("type").toLowerCase() == "password") {
 			$clone.attr("type", "text");
 		}
@@ -136,24 +136,50 @@ $(".wideform").find(".formrow").each(function() {
 });
 
 
+// polyfill compatible reset, extended for validate
+$("form").each(function() {
+	var $form = $(this);
+	$form.on("reset", function(e) {
+		e.preventDefault;
+		$form.find("input, textarea").each(function() {
+			var $field = $(this);
+			$field.removeClass("error checked");
+			$("label.error").remove();
+			if (typeof $field.data("orig-input") !== "undefined") {
+				setTimeout(function() { // IE needs this
+					$field.val($field.data("orig-input").data("placeholder"));
+				});
+			}
+		});
+	});
+});
+
+
 // jQuery Validate
-$.validator.addMethod("pattern", function(value, element, param) {
-	if (this.optional(element)) {
+$.validator.addMethod("pattern", function(val, el, param) {
+	if (this.optional(el) || $(el).is(this.settings.ignore)) {
 		return true;
 	}
-	if (typeof param === 'string') {
-		param = new RegExp('^(?:' + param + ')$');
+	if (typeof param === "string") {
+		param = new RegExp("^(?:" + param + ")$");
 	}
-	return param.test(value);
+	return param.test(val);
 }, "Ungültiges Format.");
 
 $("form").validate({
+	ignore: ".ignore",
 	errorPlacement: function($err, $el) {
 		$err.appendTo($el.closest(".formitem"));
 	},
+	// onkeyup: function(el, e) {
+	// 	// remove error class on keyup, not on focus (see focusCleanup above)
+	// 	$(el).removeClass("error");
+	// 	// prevent validation on keyup (on blur is soon enough)
+	// 	return false;
+	// },
 	rules: {
 		passwordagain: {
-			equalTo: "#password"
+			equalTo: "[name=password]"
 		}
 	},
 	messages: {
