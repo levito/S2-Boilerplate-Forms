@@ -134,7 +134,7 @@
 
 // font -----------------------------------------------------------------------
 
-.formlayout-font(@size,@lineheight,@wordspacing) {
+.formlayout-font(@size,@lineheight,@wordspacing:0) {
 	font-size: @size;
 	line-height: @lineheight;
 	word-spacing: @wordspacing;
@@ -144,23 +144,26 @@
 	.no-whitespace() {
 		.formlayout-font(.1%,0,-.3em);
 	}
+	.size(@size,@lineheight:1.333) { // generic with default line-height
+		.formlayout-font(@size,@lineheight)
+	}
 	.size1() { // h1
-		.formlayout-font(42px,46px,0);
+		.formlayout-font(42px,46px);
 	}
 	.size2() { // h2
-		.formlayout-font(24px,29px,0);
+		.formlayout-font(24px,29px);
 	}
 	.size3() { // h3
-		.formlayout-font(18px,23px,0);
+		.formlayout-font(18px,23px);
 	}
 	.size4() { // h4, p
-		.formlayout-font(15px,20px,0);
+		.formlayout-font(15px,20px);
 	}
 	.size5() {
-		.formlayout-font(12px,16px,0);
+		.formlayout-font(12px,16px);
 	}
 	.size6() {
-		.formlayout-font(11px,15px,0);
+		.formlayout-font(11px,15px);
 	}
 
 	.sans() {
