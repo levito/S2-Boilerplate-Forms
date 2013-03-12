@@ -1,133 +1,21 @@
-@charset "UTF-8";
-
-@font-face {
-	font-family: 'FontAwesome';
-	src: url('http://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.0.2/font/fontawesome-webfont.eot?v=3.0.1');
-	src: url('http://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.0.2/font/fontawesome-webfont.eot?#iefix&v=3.0.1') format('embedded-opentype'),
-		url('http://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.0.2/font/fontawesome-webfont.woff?v=3.0.1') format('woff'),
-		url('http://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.0.2/font/fontawesome-webfont.ttf?v=3.0.1') format('truetype');
-	font-weight: normal;
-	font-style: normal;
-}
-
-@errorcolor: #d23;
-@accentcolor: #59d;
-@formgutterwidth: 5px;
-
-#restoreFontsize() {
-	font-size: 15px;
-	line-height: 1.333;
-	word-spacing: 0;
-}
-#removeWhitespace() {
-	font-size: .1%; // 0 doesn't always work, e.g. Safari 5/win
-	line-height: 0;
-	word-spacing: -.3em; // needed by browser with min font-size > 0, e.g. Opera
-}
-#boxsizing(@model: border-box) {
-	-moz-box-sizing: @model;
-	box-sizing: @model;
-}
-#transition(@params: all .2s) {
-	-moz-transition: @params;
-	-webkit-transition: @params;
-	transition: @params;
-}
-#visuallyHidden() {
-	position: absolute;
-	z-index: -1;
-	opacity: 0;
-	width: 1px;
-	height: 1px;
-	margin: -1px;
-	padding: 0;
-	border: 0;
-	clip: rect(0 0 0 0);
-	overflow: hidden;
-}
-
-#starOn() {
-	&:before {
-		font-family: "FontAwesome";
-		content: "\f005";
-		// content: "\2605";
-	}
-}
-#starOff() {
-	&:before {
-		font-family: "FontAwesome";
-		content: "\f006";
-		// content: "\2606";
-	}
-}
-
-body {
-	max-width: 1280px;
-	margin: 0 auto;
-	padding: 20px;
-	background: #f2f2f2;
-}
-a {
-	#transition;
-	color: darken(@accentcolor, 8%);
-	&:hover {
-		color: lighten(@accentcolor, 4%);
-	}
-}
-h1, h2, h3 {
-	font-family: Georgia, serif;
-}
-h1 {
-	margin-top: 0;
-	text-align: center;
-	text-transform: uppercase;
-	font-size: 3em;
-	letter-spacing: -2px;
-	&:after {
-		content: "❦";
-		display: block;
-		margin: .3em 0 1.3em;
-		text-align: center;
-		font-weight: normal;
-	}
-	span {
-		display: block;
-		font-size: 40%;
-		text-transform: none;
-		font-weight: normal;
-		letter-spacing: 0;
-	}
-}
-hr {
-	margin: 1em 0;
-	border: none;
-	border-top: 1px solid #d9d9d9;
-}
-
-body,
-input,
-button,
-select,
-textarea {
-	#boxsizing;
-	#restoreFontsize;
-	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
-}
 button::-moz-focus-inner,
 input::-moz-focus-inner {
     border: 0;
     padding: 0;
 }
-.placeholder {
+.placeholder { // class for polyfill
 	color: #999;
 	font-style: italic;
+	opacity: 1;
 }
-:-moz-placeholder { .placeholder; }
+:-moz-placeholder { .placeholder; } // Firefox < 19
+::-moz-placeholder { .placeholder; } // Firefox 19+
 :-ms-input-placeholder { .placeholder; }
 ::-webkit-input-placeholder { .placeholder; }
 
 input[type="text"],
 input[type="password"],
+input[type="search"],
 input[type="number"],
 input[type="tel"],
 input[type="email"],
@@ -140,23 +28,24 @@ input[type="datetime"],
 input[type="datetime-local"],
 select,
 textarea {
+	#formlayout-shadow > .input;
+	#formlayout-border-radius > .none;
 	display: inline-block;
-	margin: 4px @formgutterwidth;
+	margin: 4px 0;
 	border: 1px solid #d9d9d9;
 	padding: 6px;
 	line-height: normal; // allows same height across browsers
 	outline: none;
-	box-shadow: inset 0 1px 1px rgba(0,0,0,.07);
 	background: #fafafa;
 	&:hover {
 		border-color: #c0c0c0;
 	}
 	&:focus {
-		border-color: @accentcolor;
+		border-color: @formlayout-accentcolor;
 	}
 	&.error {
-		border: 1px solid @errorcolor;
-		color: @errorcolor;
+		border: 1px solid @formlayout-errorcolor;
+		color: @formlayout-errorcolor;
 	}
 }
 select {
@@ -166,10 +55,10 @@ textarea {
 	overflow-y: auto; // IE fix for consistency
 }
 fieldset {
+	#formlayout-shadow > .large;
 	margin: 20px -20px;
 	border: none;
 	padding: 15px 20px;
-	box-shadow: 0 2px 20px rgba(0,0,0,.1);
 	background: #fff;
 	.legend { // use with headlines; legend element is a bitch to style
 		margin-top: 0;
@@ -179,11 +68,11 @@ fieldset {
 // grid
 .formrow {
 	.label {
-		font-size: 12px;
+		#formlayout-font > .size5;
 		font-weight: bold;
 		&.req:after {
 			content: "*";
-			color: @errorcolor;
+			color: @formlayout-errorcolor;
 		}
 	}
 	> .label {
@@ -208,6 +97,7 @@ fieldset {
 
 		input[type="text"],
 		input[type="password"],
+		input[type="search"],
 		input[type="number"],
 		input[type="tel"],
 		input[type="email"],
@@ -221,19 +111,24 @@ fieldset {
 		select,
 		textarea {
 			width: 100%;
-			margin-left: 0;
-			margin-right: 0;
 		}
 		label.error {
+			#formlayout-font > .size6;
 			clear: left;
-			font-size: 11px;
 			font-weight: bold;
-			color: @errorcolor;
+			color: @formlayout-errorcolor;
 		}
+		// alternative error display behavior: hide on focus (e.g. when error messages cover inputs)
+		// input,
+		// select,
+		// textarea { // no need to be too specific here - keep generated css small!
+		// 	~ label.error { display: none; } // auto-hide error messages when typing
+		// 	&.error ~ label.error { display: block; }
+		// }
 		.ticks {
 			padding: 5px 0 0;
 			label {
-				#transition;
+				#formlayout-transition > .short;
 				display: inline-block;
 				color: #999;
 				&:hover { color: #666; }
@@ -251,7 +146,7 @@ fieldset {
 					float: left;
 					margin: 1px -9px 0 0; // ensure label text doesn't start below input
 					&.error ~ span {
-						color: @errorcolor;
+						color: @formlayout-errorcolor;
 					}
 				}
 
@@ -272,41 +167,50 @@ fieldset {
 		.rating {
 			padding: 5px 0 0;
 			label {
-				#starOff;
-				float: right; // direction:rtl and non-static positioning of input breaks in IE8
+				#formlayout-tools > .star-off;
+				#formlayout-font > .size1;
+				line-height: 1;
 				width: 42px;
 				height: 42px;
-				font-size: 42px;
-				line-height: 1;
+				float: right; // direction:rtl and non-static positioning of input breaks in IE8
 				cursor: pointer;
 				span {
 					display: none;
 				}
 			}
 			input {
-				#visuallyHidden; // display:none would prevent submitting the value
+				#formlayout-tools > .visually-hidden; // display:none would prevent submitting the value
 			}
 			label:hover,
 			label:hover ~ label,
 			input.checked ~ label { // class "checked" for IE8
-				#starOn;
+				#formlayout-tools > .star-on;
 			}
 			input:checked ~ label { // separate to not confuse IE8
-				#starOn;
+				#formlayout-tools > .star-on;
 			}
 			&:hover {
 				input {
-					~ label { #starOff; }
+					~ label {
+						#formlayout-tools > .star-off;
+					}
 				}
 				label:hover,
-				label:hover ~ label { #starOn; }
+				label:hover ~ label {
+					#formlayout-tools > .star-on;
+				}
 			}
 		}
 	}
 }
 
 // respond! IE8 friendly - we just set body classes via JS (no respond.js)
-.gt480 {
+// use html classes/mixins + corresponding JS function if you need to support IE8:
+// .gt400 {
+
+// otherwise just use @media query to avoid duplicate rules
+@media screen and (min-width:401px) {
+
 	body { padding: 40px; }
 	fieldset {
 		margin: 40px 0;
@@ -314,33 +218,32 @@ fieldset {
 	}
 
 	.formrow {
-		#removeWhitespace;
-		margin-left: -@formgutterwidth;
-		margin-right: -@formgutterwidth;
+		#formlayout-font > .no-whitespace;
+		margin-right: -@formlayout-gutterwidth;
 		.formitem {
-			#boxsizing;
-			#restoreFontsize;
-			padding-left: @formgutterwidth;
-			padding-right: @formgutterwidth;
+			#formlayout-box > .border;
+			#formlayout-font > .size4;
+			padding-right: @formlayout-gutterwidth;
 
 			&:last-child {
-				margin-right: -99px; // needed for older webkits (e.g. Safari 5, Android 2 stock browser)
+				margin-right: -99px; // older webkits (e.g. Safari 5, Android 2 stock browser) don't accept font-size:0 and word-spacing
 			}
 
 			// fake element which aligns with other .labels if current formitem has no .label:
 			&:before {
+				#formlayout-font > .size5; // same as .label
 				content: "\00a0";
 				display: block;
-				font-size: 12px;
-				line-height: 15px;
+				font-weight: bold; // vertical dimensions may vary with different weight/style
 				height: 15px;
-				margin-top: -15px;
+				margin-top: -15px; // line-height
 			}
 
 			.rating label {
+				#formlayout-font > .size2;
+				line-height: 1;
 				width: 24px;
 				height: 24px;
-				font-size: 24px;
 			}
 		}
 		.col1of1 { width: 100%; }
@@ -355,21 +258,26 @@ fieldset {
 		.col4of5 { width: 80%; }
 	}
 }
-.gt800 {
+
+// use html classes/mixins + corresponding JS function if you need to support IE8:
+// .gt800 {
+
+// otherwise just use @media query to avoid duplicate rules
+@media screen and (min-width:801px) {
+
 	body { padding: 80px; }
 
 	.wideform .formrow {
-		@labelwidth: 25%;
-		@indent: @labelwidth / (100% - @labelwidth) * 100;
+		@labelwidth: 25%; // fixed: 200px;
+		@indent: @labelwidth / (100% - @labelwidth) * 100; // fixed: 200px;
 		padding-left: @labelwidth;
 		> .label {
-			#boxsizing;
-			#restoreFontsize;
-			font-size: 12px;
+			#formlayout-box > .border;
+			#formlayout-font > .size5;
 			display: inline-block;
 			vertical-align: top;
 			margin-left: -@indent;
-			padding: 13px @formgutterwidth 20px  (@formgutterwidth + @formgutterwidth * @indent / 100);
+			padding: 13px @formlayout-gutterwidth 20px (@formlayout-gutterwidth * @indent / 100); // fixed: 0;
 			width: @indent;
 		}
 		.formitem {
@@ -387,68 +295,117 @@ fieldset {
 		}
 	}
 }
-@media screen and (min-width:481px) {
-	.gt480;
-}
-@media screen and (min-width:801px) {
-	.gt800;
-}
+
+// use html classes/mixins + corresponding JS function if you need to support IE8:
+// @media screen and (min-width:401px) {
+// 	.gt400;
+// }
+// @media screen and (min-width:801px) {
+// 	.gt800;
+// }
 
 // buttons
 .button {
-	#transition;
+	#formlayout-transition > .short;
+	#formlayout-border-radius > .small;
+	#formlayout-font > .size5;
 	display: inline-block;
-	margin: 4px @formgutterwidth;
+	margin: 4px 0;
 	border: 1px solid transparent;
-	border: 1px solid rgba(0,0,0,.1);
+	border: 1px solid rgba(0,0,0,.15);
 	padding: 7px 16px; // top/bottom should be equal
 	text-decoration: none;
 	background: #e0e0e0;
 	color: #333;
-	border-radius: 2px;
-	font-size: 12px;
 	line-height: normal; // for same height as inputs
 	font-weight: bold;
 	cursor: pointer;
 	outline: none;
 	&:hover {
 		background: #e5e5e5;
-		border-color: rgba(0,0,0,.2);
+		border-color: rgba(0,0,0,.25);
 		color: #000;
 	}
+	&:focus {
+		#formlayout-shadow > .button-focus;
+	}
 	&:active {
-		#transition(none);
+		#formlayout-transition > .none;
+		#formlayout-shadow > .button-active;
 		background: #e0e0e0;
-		box-shadow: inset 0 1px 3px rgba(0,0,0,.2);
 	}
 	&.disabled {
+		#formlayout-shadow > .none;
 		background: #f2f2f2;
 		border-color: rgba(0,0,0,.1);
 		color: #999;
-		box-shadow: none;
 		cursor: not-allowed;
 	}
 
 	&.primary {
-		background: @accentcolor;
+		background: @formlayout-accentcolor;
 		color: #fff;
 		&:hover {
-			background: lighten(@accentcolor, 4%);
+			background: lighten(@formlayout-accentcolor, 4%);
 			color: #fff;
 		}
 		&:active {
-			background: @accentcolor;
+			background: @formlayout-accentcolor;
 		}
 	}
 }
 .buttons {
 	text-align: right;
-	margin-left: -@formgutterwidth;
-	margin-right: -@formgutterwidth;
+	margin-right: -@formlayout-gutterwidth;
 	.forth {
 		float: right;
 	}
 	.back {
 		text-align: left;
 	}
+}
+
+// toggle buttons
+.togglebutton {
+	#formlayout-font > .no-whitespace;
+	display: inline-block;
+	label ~ label > span {
+		#formlayout-border-radius > .left(0);
+	}
+	label:not(:last-child) > span {
+		#formlayout-border-radius > .right(0);
+	}
+	input {
+		#formlayout-tools > .visually-hidden;
+		+ span {
+			.button; // candidate for :extend() when using less.js 1.4+
+			margin: 0;
+		}
+		&:checked + span {
+			#formlayout-shadow > .button-active;
+			background: @formlayout-accentcolor;
+			color: #fff;
+			&:hover {
+				background: lighten(@formlayout-accentcolor, 4%);
+			}
+		}
+		&.checked + span {
+			#formlayout-shadow > .button-active;
+			background: @formlayout-accentcolor;
+			color: #fff;
+			&:hover {
+				background: lighten(@formlayout-accentcolor, 4%);
+			}
+		}
+		&:focus + span {
+			#formlayout-shadow > .button-focus;
+		}
+	}
+}
+
+// common for both: margins inside .buttons or .formitem
+.buttons,
+.formitem {
+	.button,
+	.togglebutton { margin-right: @formlayout-gutterwidth; }
 }
