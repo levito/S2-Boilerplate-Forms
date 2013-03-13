@@ -51,6 +51,24 @@ textarea {
 select {
 	padding: 5px;
 }
+@media (-webkit-min-device-pixel-ratio: 0) {
+	select {
+		&[size],
+		&[multiple] {
+			background-image: none;
+			padding-right: 6px;
+		}
+		&,
+		&[size="0"],
+		&[size="1"] {
+			background-image: url("data:image/png;base64,R0lGODlhDQAEAIAAAAAAAP8A/yH5BAEHAAEALAAAAAANAAQAAAILhA+hG5jMDpxvhgIAOw==");
+			background-position: 100% 50%;
+			background-repeat: no-repeat;
+			-webkit-appearance: none;
+			padding: 5px 20px 5px 5px;
+		}
+	}
+}
 textarea {
 	overflow-y: auto; // IE fix for consistency
 }
