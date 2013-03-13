@@ -76,6 +76,17 @@ body {
   text-align: center;
 }
 
+.reveal ul > li {
+  list-style: none;
+}
+.reveal ul > li:before {
+  content: "/";
+  float: left;
+  margin-left: -1em;
+  width: 1em;
+  opacity: .3;
+}
+
 /*********************************************
  * LINKS
  *********************************************/
