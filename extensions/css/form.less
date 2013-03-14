@@ -432,8 +432,8 @@ fieldset {
 	// }
 	&:before {
 		#formlayout-box > .border;
-		#formlayout-border-radius > .small;
-		#formlayout-shadow > .input;
+		#formlayout-border-radius > .round;
+		#formlayout-shadow > .button-active;
 		content: "";
 		display: block;
 		position: absolute;
@@ -451,19 +451,22 @@ fieldset {
 			#formlayout-transition > .short;
 			position: relative;
 			display: block;
-			padding-right: 54px;
-			border-right: 21px solid transparent;
+			padding-right: 60px;
+			border-right: 15px solid transparent;
 			&:after {
-				#formlayout-border-radius > .small;
-				#formlayout-font > .size5;
+				#formlayout-border-radius > .round;
+				#formlayout-font > .size6;
 				content: attr(data-off);
 				display: block;
 				position: absolute;
 				top: 0;
 				right: 2px;
-				width: 36px;
+				width: 42px;
 				height: 16px;
-				padding: 2px;
+				border: 1px solid rgba(0,0,0,.05);
+				border-top-color: rgba(255,255,255,.2);
+				border-bottom-color: rgba(0,0,0,.2);
+				padding: 1px;
 				font-weight: bold;
 				text-align: center;
 				color: #fff;
@@ -471,6 +474,7 @@ fieldset {
 			}
 			&:active:after {
 				#formlayout-shadow > .button-active;
+				border-color: rgba(0,0,0,.1);
 			}
 		}
 		&:checked + span {
