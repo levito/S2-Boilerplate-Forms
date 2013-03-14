@@ -65,7 +65,7 @@ select {
 			background-position: 100% 50%;
 			background-repeat: no-repeat;
 			-webkit-appearance: none;
-			padding: 5px 20px 5px 5px;
+			padding: 6px 18px 6px 6px;
 		}
 	}
 }
@@ -146,11 +146,11 @@ fieldset {
 		.ticks {
 			padding: 5px 0 0;
 			label {
-				#formlayout-transition > .short;
+				#formlayout-transition > .medium;
 				display: inline-block;
 				color: #999;
 				&:hover { color: #666; }
-				input.checked ~ span { color: #000; } // class "checked" for IE8
+				// input.checked ~ span { color: #000; } // class "checked" for IE8
 				input:checked ~ span { color: #000; } // separate to not confuse IE8
 
 				// version 1
@@ -199,9 +199,9 @@ fieldset {
 			input {
 				#formlayout-tools > .visually-hidden; // display:none would prevent submitting the value
 			}
+			// input.checked ~ label, // class "checked" for IE8
 			label:hover,
-			label:hover ~ label,
-			input.checked ~ label { // class "checked" for IE8
+			label:hover ~ label {
 				#formlayout-tools > .star-on;
 			}
 			input:checked ~ label { // separate to not confuse IE8
@@ -324,7 +324,7 @@ fieldset {
 
 // buttons
 .button {
-	#formlayout-transition > .short;
+	#formlayout-transition > .medium;
 	#formlayout-border-radius > .small;
 	#formlayout-font > .size5;
 	display: inline-block;
@@ -406,17 +406,89 @@ fieldset {
 				background: lighten(@formlayout-accentcolor, 4%);
 			}
 		}
-		&.checked + span {
-			#formlayout-shadow > .button-active;
-			background: @formlayout-accentcolor;
-			color: #fff;
-			&:hover {
-				background: lighten(@formlayout-accentcolor, 4%);
-			}
-		}
+		// &.checked + span { // IE8...
+		// 	#formlayout-shadow > .button-active;
+		// 	background: @formlayout-accentcolor;
+		// 	color: #fff;
+		// 	&:hover {
+		// 		background: lighten(@formlayout-accentcolor, 4%);
+		// 	}
+		// }
 		&:focus + span {
 			#formlayout-shadow > .button-focus;
 		}
+	}
+}
+
+// slide buttons
+.slidebutton {
+	position: relative;
+	display: block;
+	margin: 4px 0;
+	padding: 8px 0;
+	// width: 100%;
+	// @media screen and (min-width:801px) {
+	// 	width: auto;
+	// }
+	&:before {
+		#formlayout-box > .border;
+		#formlayout-border-radius > .small;
+		#formlayout-shadow > .input;
+		content: "";
+		display: block;
+		position: absolute;
+		top: 6px;
+		right: 0;
+		width: 65px;
+		height: 24px;
+		background: #e0e0e0;
+		border: 1px solid #c0c0c0;
+	}
+	input {
+		#formlayout-tools > .visually-hidden;
+		+ span {
+			#formlayout-box > .border;
+			#formlayout-transition > .short;
+			position: relative;
+			display: block;
+			padding-right: 54px;
+			border-right: 21px solid transparent;
+			&:after {
+				#formlayout-border-radius > .small;
+				#formlayout-font > .size5;
+				content: attr(data-off);
+				display: block;
+				position: absolute;
+				top: 0;
+				right: 2px;
+				width: 36px;
+				height: 16px;
+				padding: 2px;
+				font-weight: bold;
+				text-align: center;
+				color: #fff;
+				background-color: #999;
+			}
+			&:active:after {
+				#formlayout-shadow > .button-active;
+			}
+		}
+		&:checked + span {
+			padding-right: 75px;
+			border-right-width: 0;
+			&:after {
+				content: attr(data-on);
+				background-color: @formlayout-accentcolor;
+			}
+		}
+		// &.checked + span { // yep. IE8.
+		// 	padding-right: 70px;
+		// 	border-right-width: 0;
+		// 	&:after {
+		// 		content: attr(data-on);
+		// 		background-color: @formlayout-accentcolor;
+		// 	}
+		// }
 	}
 }
 
