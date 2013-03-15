@@ -15,53 +15,73 @@
 //
 // use Modernizr if available
 // for IE8 support
-//function supportsCssRule(rule) {
-//	var el = document.createElement("div");
-//	el.innerHTML = ["&shy;", "<style type='text/css'>", rule, "</style>"].join("");
-//	el = document.body.appendChild(el);
-//	var style = el.getElementsByTagName("style")[0],
-//		ret = !!((style.sheet && style.sheet.cssRules) || style.styleSheet.rules)[0];
-//	document.body.removeChild(el);
-//	el = null;
-//	return ret;
-//}
+var supportsCssRule = (function() {
+	var cache = {};
+	return function (cssRule) {
+		var supported = false;
+		if (cache.hasOwnProperty(cssRule)) {
+			supported = cache[cssRule];
+		} else {
+			var style = document.createElement("style");
+			style.setAttribute("type", "text\/css");
+			document.body.appendChild(style);
+			if (style.styleSheet) {
+				style.styleSheet.cssText = cssRule;
+				var rules = style.styleSheet.rules;
+				supported = !!(rules && rules[0] &&
+					rules[0].cssRuleText &&
+					rules[0].cssRuleText.toLowerCase &&
+					rules[0].cssRuleText.toLowerCase().indexOf("unknown") < 0);
+			} else {
+				style.appendChild(document.createTextNode(cssRule));
+				document.body.appendChild(style);
+				supported = !!style.sheet.cssRules.length;
+				document.body.removeChild(style);
+			}
+			cache[cssRule] = supported;
+			document.body.removeChild(style);
+			style = null;
+		}
+		return supported;
+	};
+})();
 
 
 // :checked polyfill
 // for IE8 support
-//if (!supportsCssRule(":checked{}")) {
-//	var checkedPolyfill = function() {
-//		var $input = $(this);
-//		if ($input.is(":checked")) {
-//			if ($input.is(":radio")) {
-//				$("[name='" + $input.attr("name") + "']").removeClass("checked");
-//			}
-//			$input.addClass("checked");
-//		} else if ($input.is(":checkbox")) {
-//			$input.removeClass("checked");
-//		}
-//	};
-//	$(document).on("click", ":radio, :checkbox", checkedPolyfill);
-//	$(":radio, :checkbox").each(checkedPolyfill);
-//}
+if (!supportsCssRule(":checked{}")) {
+	var checkedPolyfill = function() {
+		var $input = $(this);
+		if ($input.is(":checked")) {
+			if ($input.is(":radio")) {
+				$("[name='" + $input.attr("name") + "']").removeClass("checked");
+			}
+			$input.addClass("checked");
+		} else if ($input.is(":checkbox")) {
+			$input.removeClass("checked");
+		}
+	};
+	$(document).on("click", ":radio, :checkbox", checkedPolyfill);
+	$(":radio, :checkbox").each(checkedPolyfill);
+}
 
 
 // @media query simulation
 // for IE8 support
-//if (!supportsCssRule("@media only all{a{}}")) {
-//	var oldBodyClass = document.body.className;
-//	var checkWindowWidth = function() {
-//		if (document.body.clientWidth > 800) {
-//			document.body.className = oldBodyClass + " gt400 gt800";
-//		} else if (document.body.clientWidth > 400) {
-//			document.body.className = oldBodyClass + " gt400";
-//		} else {
-//			document.body.className = oldBodyClass;
-//		}
-//	};
-//	checkWindowWidth();
-//	$(window).resize(checkWindowWidth);
-//}
+if (!supportsCssRule("@media only all{a{}}")) {
+	var oldBodyClass = document.documentElement.className;
+	var checkWindowWidth = function() {
+		if (document.documentElement.clientWidth > 800) {
+			document.documentElement.className = oldBodyClass + " gt400 gt800";
+		} else if (document.documentElement.clientWidth > 400) {
+			document.documentElement.className = oldBodyClass + " gt400";
+		} else {
+			document.documentElement.className = oldBodyClass;
+		}
+	};
+	checkWindowWidth();
+	$(window).resize(checkWindowWidth);
+}
 
 
 // Placeholder polyfill

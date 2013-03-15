@@ -150,7 +150,7 @@ fieldset {
 				display: inline-block;
 				color: #999;
 				&:hover { color: #666; }
-				// input.checked ~ span { color: #000; } // class "checked" for IE8
+				input.checked ~ span { color: #000; } // class "checked" for IE8
 				input:checked ~ span { color: #000; } // separate to not confuse IE8
 
 				// version 1
@@ -199,7 +199,7 @@ fieldset {
 			input {
 				#formlayout-tools > .visually-hidden; // display:none would prevent submitting the value
 			}
-			// input.checked ~ label, // class "checked" for IE8
+			input.checked ~ label, // class "checked" for IE8
 			label:hover,
 			label:hover ~ label {
 				#formlayout-tools > .star-on;
@@ -224,12 +224,15 @@ fieldset {
 
 // respond! IE8 friendly - we just set body classes via JS (no respond.js)
 // use html classes/mixins + corresponding JS function if you need to support IE8:
-// .gt400 {
+.gt400 {
 
 // otherwise just use @media query to avoid duplicate rules
-@media screen and (min-width:401px) {
+//@media screen and (min-width:401px) {
 
-	body { padding: 40px; }
+	body {
+		padding: 40px;
+		*width: 720px;
+	}
 	fieldset {
 		margin: 40px 0;
 		padding: 30px 40px;
@@ -264,26 +267,49 @@ fieldset {
 				height: 24px;
 			}
 		}
-		.col1of1 { width: 100%; }
-		.col1of2 { width: 50%; }
-		.col1of3 { width: 33.33%; }
-		.col2of3 { width: 66.66%; }
-		.col1of4 { width: 25%; }
-		.col3of4 { width: 75%; }
-		.col1of5 { width: 20%; }
-		.col2of5 { width: 40%; }
-		.col3of5 { width: 60%; }
-		.col4of5 { width: 80%; }
+		.col1of1 { width: 100%; *width: 590px;
+			input, textarea { *width: 576px; }
+		}
+		.col1of2 { width: 50%; *width: 290px;
+			input, textarea { *width: 276px; }
+		}
+		.col1of3 { width: 33.33%; *width: 190px;
+			input, textarea { *width: 176px; }
+		}
+		.col2of3 { width: 66.66%; *width: 390px;
+			input, textarea { *width: 376px; }
+		}
+		.col1of4 { width: 25%; *width: 140px;
+			input, textarea { *width: 126px; }
+		}
+		.col3of4 { width: 75%; *width: 440px;
+			input, textarea { *width: 126px; }
+		}
+		.col1of5 { width: 20%; *width: 110px;
+			input, textarea { *width: 96px; }
+		}
+		.col2of5 { width: 40%; *width: 230px;
+			input, textarea { *width: 216px; }
+		}
+		.col3of5 { width: 60%; *width: 350px;
+			input, textarea { *width: 336px; }
+		}
+		.col4of5 { width: 80%; *width: 470px;
+			input, textarea { *width: 456px; }
+		}
 	}
 }
 
 // use html classes/mixins + corresponding JS function if you need to support IE8:
-// .gt800 {
+.gt800 {
 
 // otherwise just use @media query to avoid duplicate rules
-@media screen and (min-width:801px) {
+//@media screen and (min-width:801px) {
 
-	body { padding: 80px; }
+	body {
+		padding: 80px;
+		*width: 1092px;
+	}
 
 	.wideform .formrow {
 		@labelwidth: 25%; // fixed: 200px;
@@ -315,12 +341,12 @@ fieldset {
 }
 
 // use html classes/mixins + corresponding JS function if you need to support IE8:
-// @media screen and (min-width:401px) {
-// 	.gt400;
-// }
-// @media screen and (min-width:801px) {
-// 	.gt800;
-// }
+@media screen and (min-width:401px) {
+	.gt400;
+}
+@media screen and (min-width:801px) {
+	.gt800;
+}
 
 // buttons
 .button {
@@ -339,6 +365,11 @@ fieldset {
 	font-weight: bold;
 	cursor: pointer;
 	outline: none;
+	*overflow: visible;
+	input&,
+	button& {
+		*padding: 6px 16px 4px;
+	}
 	&:hover {
 		background: #e5e5e5;
 		border-color: rgba(0,0,0,.25);
@@ -406,14 +437,14 @@ fieldset {
 				background: lighten(@formlayout-accentcolor, 4%);
 			}
 		}
-		// &.checked + span { // IE8...
-		// 	#formlayout-shadow > .button-active;
-		// 	background: @formlayout-accentcolor;
-		// 	color: #fff;
-		// 	&:hover {
-		// 		background: lighten(@formlayout-accentcolor, 4%);
-		// 	}
-		// }
+		&.checked + span { // IE8...
+			#formlayout-shadow > .button-active;
+			background: @formlayout-accentcolor;
+			color: #fff;
+			&:hover {
+				background: lighten(@formlayout-accentcolor, 4%);
+			}
+		}
 		&:focus + span {
 			#formlayout-shadow > .button-focus;
 		}
@@ -485,14 +516,14 @@ fieldset {
 				background-color: @formlayout-accentcolor;
 			}
 		}
-		// &.checked + span { // yep. IE8.
-		// 	padding-right: 70px;
-		// 	border-right-width: 0;
-		// 	&:after {
-		// 		content: attr(data-on);
-		// 		background-color: @formlayout-accentcolor;
-		// 	}
-		// }
+		&.checked + span { // yep. IE8.
+			padding-right: 70px;
+			border-right-width: 0;
+			&:after {
+				content: attr(data-on);
+				background-color: @formlayout-accentcolor;
+			}
+		}
 	}
 }
 
